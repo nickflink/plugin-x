@@ -28,6 +28,8 @@ public class SocialWrapper {
     public static final int SOCIAL_SUBMITSCORE_FAILED = 2;
     public static final int SOCIAL_UNLOCKACH_SUCCESS = 3;
     public static final int SOCIAL_UNLOCKACH_FAILED = 4;
+    public static final int SOCIAL_SIGNIN_SUCCESS = 5;
+    public static final int SOCIAL_SIGNIN_FAILED = 6;
 
     public static void onSocialResult(InterfaceSocial obj, int ret, String msg) {
         final int curRet = ret;

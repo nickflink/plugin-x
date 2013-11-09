@@ -26,6 +26,7 @@ THE SOFTWARE.
 #include "ProtocolAnalytics.h"
 #include "ProtocolIAP.h"
 #include "ProtocolShare.h"
+#include "ProtocolSocial.h"
 #include "PluginUtilsIOS.h"
 
 #import <Foundation/Foundation.h>
@@ -33,6 +34,8 @@ THE SOFTWARE.
 #import "InterfaceAnalytics.h"
 #import "InterfaceIAP.h"
 #import "InterfaceShare.h"
+#import "InterfaceSocial.h"
+
 
 namespace cocos2d { namespace plugin {
 
@@ -40,45 +43,63 @@ static PluginFactory* s_pFactory = NULL;
 
 PluginFactory::PluginFactory()
 {
-
+    NSLog(@"%d::%s", __LINE__, __FILE__);
 }
 
 PluginFactory::~PluginFactory()
 {
-
+    NSLog(@"%d::%s", __LINE__, __FILE__);
 }
 
 PluginFactory* PluginFactory::getInstance()
 {
+    NSLog(@"%d::%s", __LINE__, __FILE__);
 	if (NULL == s_pFactory)
 	{
+        NSLog(@"%d::%s", __LINE__, __FILE__);
 		s_pFactory = new PluginFactory();
 	}
-
+    NSLog(@"%d::%s", __LINE__, __FILE__);
 	return s_pFactory;
 }
 
 void PluginFactory::purgeFactory()
 {
+    NSLog(@"%d::%s", __LINE__, __FILE__);
 	if (NULL != s_pFactory)
 	{
+        NSLog(@"%d::%s", __LINE__, __FILE__);
 		delete s_pFactory;
 		s_pFactory = NULL;
 	}
+    NSLog(@"%d::%s", __LINE__, __FILE__);
 }
 
 /** create the plugin by name */
 PluginProtocol* PluginFactory::createPlugin(const char* name)
 {
+    PluginUtilsIOS::outputLog("obj = %d::%s", __LINE__, __FILE__);
 	PluginProtocol* pRet = NULL;
 	do
 	{
+        PluginUtilsIOS::outputLog("%d::%s", __LINE__, __FILE__);
 		if (name == NULL || strlen(name) == 0) break;
-
+        PluginUtilsIOS::outputLog("%d::%s", __LINE__, __FILE__);
         NSString* className = [NSString stringWithUTF8String:name];
-        id obj = [[NSClassFromString(className) alloc] init];
-        if (obj == nil) break;
-
+        PluginUtilsIOS::outputLog("%d::%s", __LINE__, __FILE__);
+        id klass = NSClassFromString(className);
+        if (klass == nil) {
+            NSLog(@"%d::%s NSClassFromString fails on %@", __LINE__, __FILE__, className);
+            break;
+        }
+        id obj = [[klass alloc] init];
+        NSLog(@"%d::%s obj = %@", __LINE__, __FILE__, obj);
+        //TODO: FIGURE OUT WHY MY CLASSES CANT BE LOADED
+        if (obj == nil) {
+            NSLog(@"%d::%s [[%@ alloc] fails", __LINE__, __FILE__, className);
+            break;
+        }
+        PluginUtilsIOS::outputLog("%d::%s", __LINE__, __FILE__);
         if ([obj conformsToProtocol:@protocol(InterfaceAds)]) {
             pRet = new ProtocolAds();
         } else
@@ -90,12 +111,16 @@ PluginProtocol* PluginFactory::createPlugin(const char* name)
         } else
         if ([obj conformsToProtocol:@protocol(InterfaceShare)]) {
             pRet = new ProtocolShare();
+        } else
+        if ([obj conformsToProtocol:@protocol(InterfaceSocial)]) {
+            pRet = new ProtocolSocial();
         } else {
             PluginUtilsIOS::outputLog("Plugin %s not implements a right protocol", name);
         }
 
 		if (pRet != NULL)
 		{
+            PluginUtilsIOS::outputLog("%d::%s", __LINE__, __FILE__);
 			pRet->setPluginName(name);
 			PluginUtilsIOS::initOCPlugin(pRet, obj, name);
 		}

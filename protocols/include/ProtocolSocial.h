@@ -42,6 +42,9 @@ typedef enum
     // code for achievement feature
     ACH_UNLOCK_SUCCESS,
     ACH_UNLOCK_FAILED,
+  
+    SIGN_IN_SUCCESS,
+    SIGN_IN_FAILED,
 
 } SocialRetCode;
 
