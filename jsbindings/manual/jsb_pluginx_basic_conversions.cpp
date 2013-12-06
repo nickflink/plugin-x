@@ -181,7 +181,7 @@ JSBool jsval_to_TProductInfo(JSContext *cx, jsval v, TProductInfo* ret)
             break; // end of iteration
         if (! JSVAL_IS_STRING(key))
             continue; // ignore integer properties
-        jsval value;
+        JS::RootedValue value(cx);
         JS_GetPropertyById(cx, tmp, idp, &value);
         if (! JSVAL_IS_STRING(value))
             continue; // ignore integer properties
@@ -206,7 +206,12 @@ JSBool jsval_to_TAdsDeveloperInfo(JSContext *cx, jsval v, TAdsDeveloperInfo* ret
     return jsval_to_TProductInfo(cx, v, ret);
 }
 
-JSBool jsval_to_TSocialDeveloperInfo(JSContext *cx, jsval v, TSocialDeveloperInfo* ret)
+JSBool jsval_to_TAdsInfo(JSContext *cx, jsval v, TAdsInfo* ret)
+{
+    return jsval_to_TProductInfo(cx, v, ret);
+}
+
+JSBool jsval_to_TShareDeveloperInfo(JSContext *cx, jsval v, TShareDeveloperInfo* ret)
 {
     return jsval_to_TProductInfo(cx, v, ret);
 }
@@ -217,6 +222,21 @@ JSBool jsval_to_TShareInfo(JSContext *cx, jsval v, TShareInfo* ret)
 }
 
 JSBool jsval_to_TPaymentInfo(JSContext *cx, jsval v, std::map<std::string, std::string>* ret)
+{
+    return jsval_to_TProductInfo(cx, v, ret);
+}
+
+JSBool jsval_to_TSocialDeveloperInfo(JSContext *cx, jsval v, TSocialDeveloperInfo* ret)
+{
+    return jsval_to_TProductInfo(cx, v, ret);
+}
+
+JSBool jsval_to_TAchievementInfo(JSContext *cx, jsval v, TAchievementInfo* ret)
+{
+    return jsval_to_TProductInfo(cx, v, ret);
+}
+
+JSBool jsval_to_TUserDeveloperInfo(JSContext *cx, jsval v, TUserDeveloperInfo* ret)
 {
     return jsval_to_TProductInfo(cx, v, ret);
 }
@@ -265,19 +285,26 @@ jsval long_to_jsval(JSContext* cx, long v)
     return INT_TO_JSVAL(v);
 }
 
-jsval std_string_to_jsval(JSContext* cx, std::string& v) {
-    JSString *str = JS_NewStringCopyZ(cx, v.c_str());
-    jsval rval;
-    // unsigned short* pUTF16 = cc_utf8_to_utf16(v.c_str());
-    // JSString *str = JS_NewUCStringCopyZ(cx, pUTF16);
-    rval = STRING_TO_JSVAL(str);
-    // delete[] pUTF16;
-    return rval;
+jsval std_string_to_jsval(JSContext* cx, const std::string& v) {
+    return c_string_to_jsval(cx, v.c_str());
 }
 
-jsval c_string_to_jsval(JSContext* cx, const char* v) {
-    std::string str(v);
-    return std_string_to_jsval(cx, str);
+jsval c_string_to_jsval(JSContext* cx, const char* v, size_t length /* = -1 */) {
+    if (v == NULL) {
+        return JSVAL_NULL;
+    }
+    jsval ret = JSVAL_NULL;
+    int utf16_size = 0;
+    jschar* strUTF16 = (jschar*)cc_utf8_to_utf16(v, length, &utf16_size);
+
+    if (strUTF16 && utf16_size > 0) {
+        JSString* str = JS_NewUCStringCopyN(cx, strUTF16, utf16_size);
+        if (str) {
+            ret = STRING_TO_JSVAL(str);
+        }
+        delete[] strUTF16;
+    }
+    return ret;
 }
 
 jsval TProductInfo_to_jsval(JSContext *cx, TProductInfo& ret)

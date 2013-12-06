@@ -2,7 +2,7 @@ LOCAL_PATH := $(call my-dir)
 
 include $(CLEAR_VARS)
 
-LOCAL_MODULE := game_shared
+LOCAL_MODULE := game
 
 LOCAL_MODULE_FILENAME := libgame
 
@@ -21,19 +21,16 @@ LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../Classes \
                     $(LOCAL_PATH)/../../../../jsbindings/auto \
                     $(LOCAL_PATH)/../../../../jsbindings/manual 
 
-LOCAL_WHOLE_STATIC_LIBRARIES := cocos2dx_static \
-                                PluginProtocolStatic
-
-LOCAL_WHOLE_STATIC_LIBRARIES += cocosdenshion_static
-LOCAL_WHOLE_STATIC_LIBRARIES += chipmunk_static
-LOCAL_WHOLE_STATIC_LIBRARIES += spidermonkey_static
-LOCAL_WHOLE_STATIC_LIBRARIES += scriptingcore-spidermonkey
+LOCAL_WHOLE_STATIC_LIBRARIES := cocos_jsb_static \
+        jsb_extension_static \
+        jsb_localstorage_static \
+        jsb_chipmunk_static \
+        PluginProtocolStatic
 
 include $(BUILD_SHARED_LIBRARY)
 
-$(call import-module,cocos2dx)
-$(call import-module,CocosDenshion/android)
-$(call import-module,external/chipmunk)
-$(call import-module,scripting/javascript/spidermonkey-android)
 $(call import-module,scripting/javascript/bindings)
+$(call import-module,scripting/javascript/bindings/extension)
+$(call import-module,scripting/javascript/bindings/localstorage)
+$(call import-module,scripting/javascript/bindings/chipmunk)
 $(call import-module,protocols/android)

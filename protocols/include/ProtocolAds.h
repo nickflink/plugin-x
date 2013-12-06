@@ -31,13 +31,14 @@ THE SOFTWARE.
 namespace cocos2d { namespace plugin {
 
 typedef std::map<std::string, std::string> TAdsDeveloperInfo;
+typedef std::map<std::string, std::string> TAdsInfo;
 
 typedef enum
 {
     kAdsReceived = 0,            // The ad is received
 
-    kFullScreenViewShown,       // The full screen advertisement shown
-    kFullScreenViewDismissed,   // The full screen advertisement dismissed
+    kAdsShown,                  // The advertisement shown
+    kAdsDismissed,              // The advertisement dismissed
 
     kPointsSpendSucceed,        // The points spend succeed
     kPointsSpendFailed,         // The points spend failed
@@ -70,11 +71,6 @@ public:
 	virtual ~ProtocolAds();
 
     typedef enum {
-        kBannerAd = 0,
-        kFullScreenAd,
-    } AdsType;
-
-    typedef enum {
         kPosCenter = 0,
         kPosTop,
         kPosTopLeft,
@@ -95,21 +91,22 @@ public:
 
     /**
     @brief show adview
-    @param type The adview type need to show.
-    @param sizeEnum The size of the banner view.
-                (only used when type is kBannerAd)
-                In different plugin, it's have different mean.
+    @param info The information of adview will be shown
                 Pay attention to the subclass definition
     @param pos The position where the adview be shown.
-               (only used when type is kBannerAd)
     */
-    void showAds(AdsType type, int sizeEnum = 0, AdsPos pos = kPosCenter);
+    void showAds(TAdsInfo info, AdsPos pos = kPosCenter);
 
     /**
     @brief Hide the adview
-    @param type The adview type need to hide.
+    @param info The information of adview will be hided
     */
-    void hideAds(AdsType type);
+    void hideAds(TAdsInfo info);
+
+    /**
+    @brief Query the points of player
+    */
+    void queryPoints();
 
     /**
     @brief Spend the points.
@@ -121,14 +118,18 @@ public:
     /**
      @brief set the Ads listener
     */
-    void setAdsListener(AdsListener* pListener);
+    inline void setAdsListener(AdsListener* listener)
+    {
+        _listener = listener;
+    }
 
-    // For the callbak methods
-    void onAdsResult(AdsResultCode code, const char* msg);
-    void onPlayerGetPoints(int points);
+    inline AdsListener* getAdsListener()
+    {
+        return _listener;
+    }
 
 protected:
-    AdsListener* m_pListener;
+    AdsListener* _listener;
 };
 
 }} // namespace cocos2d { namespace plugin {

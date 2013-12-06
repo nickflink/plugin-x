@@ -1,11 +1,3 @@
-//
-//  GCTestAppDelegate.h
-//  GCTest
-//
-//  Created by Rohan Kuruvilla on 06/08/2012.
-//  Copyright __MyCompanyName__ 2012. All rights reserved.
-//
-
 #ifndef  _APP_DELEGATE_H_
 #define  _APP_DELEGATE_H_
 
@@ -13,16 +5,16 @@
 /**
  @brief    The cocos2d Application.
  
- The reason for implement as private inheritance is to hide some interface call by CCDirector.
+ The reason for implement as private inheritance is to hide some interface call by Director.
  */
-class  AppDelegate : private cocos2d::CCApplication
+class  AppDelegate : private cocos2d::Application
 {
 public:
     AppDelegate();
     virtual ~AppDelegate();
     
     /**
-     @brief    Implement CCDirector and CCScene init code here.
+     @brief    Implement Director and Scene init code here.
      @return true    Initialize success, app continue.
      @return false   Initialize failed, app terminate.
      */

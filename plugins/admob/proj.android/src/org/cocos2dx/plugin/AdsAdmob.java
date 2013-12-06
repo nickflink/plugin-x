@@ -48,10 +48,14 @@ public class AdsAdmob implements InterfaceAds {
 	private Set<String> mTestDevices = null;
 	private WindowManager mWm = null;
 
-	private static final int ADMOB_SIZE_BANNER = 0;
-	private static final int ADMOB_SIZE_IABMRect = 1;
-	private static final int ADMOB_SIZE_IABBanner = 2;
-	private static final int ADMOB_SIZE_IABLeaderboard = 3;
+	private static final int ADMOB_SIZE_BANNER = 1;
+	private static final int ADMOB_SIZE_IABMRect = 2;
+	private static final int ADMOB_SIZE_IABBanner = 3;
+	private static final int ADMOB_SIZE_IABLeaderboard = 4;
+	private static final int ADMOB_SIZE_Skyscraper = 5;
+
+	private static final int ADMOB_TYPE_BANNER = 1;
+	private static final int ADMOB_TYPE_FULLSCREEN = 2;
 
 	protected static void LogE(String msg, Exception e) {
 		Log.e(LOG_TAG, msg, e);
@@ -90,35 +94,56 @@ public class AdsAdmob implements InterfaceAds {
 	}
 
 	@Override
-	public void showAds(int adsType, int sizeEnum, int pos) {
-		switch (adsType) {
-		case AdsWrapper.ADS_TYPE_BANNER:
-			showBannerAd(sizeEnum, pos);
-			break;
-		case AdsWrapper.ADS_TYPE_FULL_SCREEN:
-			LogD("Now not support full screen view in Admob");
-			break;
-		default:
-			break;
-		}
+	public void showAds(Hashtable<String, String> info, int pos) {
+	    try
+	    {
+	        String strType = info.get("AdmobType");
+	        int adsType = Integer.parseInt(strType);
+
+	        switch (adsType) {
+	        case ADMOB_TYPE_BANNER:
+	            {
+	                String strSize = info.get("AdmobSizeEnum");
+	                int sizeEnum = Integer.parseInt(strSize);
+    	            showBannerAd(sizeEnum, pos);
+                    break;
+	            }
+	        case ADMOB_TYPE_FULLSCREEN:
+	            LogD("Now not support full screen view in Admob");
+	            break;
+	        default:
+	            break;
+	        }
+	    } catch (Exception e) {
+	        LogE("Error when show Ads ( " + info.toString() + " )", e);
+	    }
 	}
 
 	@Override
 	public void spendPoints(int points) {
-		// do nothing, Admob don't have this function
+		LogD("Admob not support spend points!");
 	}
 
 	@Override
-	public void hideAds(int adsType) {
-		switch (adsType) {
-		case AdsWrapper.ADS_TYPE_BANNER:
-			hideBannerAd();
-			break;
-		case AdsWrapper.ADS_TYPE_FULL_SCREEN:
-			break;
-		default:
-			break;
-		}
+	public void hideAds(Hashtable<String, String> info) {
+	    try
+        {
+            String strType = info.get("AdmobType");
+            int adsType = Integer.parseInt(strType);
+
+            switch (adsType) {
+            case ADMOB_TYPE_BANNER:
+                hideBannerAd();
+                break;
+            case ADMOB_TYPE_FULLSCREEN:
+                LogD("Now not support full screen view in Admob");
+                break;
+            default:
+                break;
+            }
+        } catch (Exception e) {
+            LogE("Error when hide Ads ( " + info.toString() + " )", e);
+        }
 	}
 
 	private void showBannerAd(int sizeEnum, int pos) {
@@ -152,6 +177,9 @@ public class AdsAdmob implements InterfaceAds {
 				case AdsAdmob.ADMOB_SIZE_IABLeaderboard:
 					size = AdSize.IAB_LEADERBOARD;
 					break;
+				case AdsAdmob.ADMOB_SIZE_Skyscraper:
+				    size = AdSize.IAB_WIDE_SKYSCRAPER;
+				    break;
 				default:
 					break;
 				}
@@ -209,7 +237,7 @@ public class AdsAdmob implements InterfaceAds {
 		@Override
 		public void onDismissScreen(Ad arg0) {
 			LogD("onDismissScreen invoked");
-			AdsWrapper.onAdsResult(mAdapter, AdsWrapper.RESULT_CODE_FullScreenViewDismissed, "Full screen ads view dismissed!");
+			AdsWrapper.onAdsResult(mAdapter, AdsWrapper.RESULT_CODE_AdsDismissed, "Ads view dismissed!");
 		}
 
 		@Override
@@ -243,7 +271,7 @@ public class AdsAdmob implements InterfaceAds {
 		@Override
 		public void onPresentScreen(Ad arg0) {
 			LogD("onPresentScreen invoked");
-			AdsWrapper.onAdsResult(mAdapter, AdsWrapper.RESULT_CODE_FullScreenViewShown, "Full screen ads view shown!");
+			AdsWrapper.onAdsResult(mAdapter, AdsWrapper.RESULT_CODE_AdsShown, "Ads view shown!");
 		}
 
 		@Override
@@ -257,4 +285,9 @@ public class AdsAdmob implements InterfaceAds {
 	public String getPluginVersion() {
 		return "0.2.0";
 	}
+
+    @Override
+    public void queryPoints() {
+        LogD("Admob not support query points!");
+    }
 }

@@ -40,8 +40,12 @@ conversions:
     TIAPDeveloperInfo: "ok &= jsval_to_TIAPDeveloperInfo(cx, ${in_value}, &${out_value})"
     TPaymentInfo: "ok &= jsval_to_TPaymentInfo(cx, ${in_value}, &${out_value})"
     TAdsDeveloperInfo: "ok &= jsval_to_TAdsDeveloperInfo(cx, ${in_value}, &${out_value})"
-    TSocialDeveloperInfo: "ok &= jsval_to_TSocialDeveloperInfo(cx, ${in_value}, &${out_value})"
+    TAdsInfo: "ok &= jsval_to_TAdsInfo(cx, ${in_value}, &${out_value})"
+    TShareDeveloperInfo: "ok &= jsval_to_TShareDeveloperInfo(cx, ${in_value}, &${out_value})"
     TShareInfo: "ok &= jsval_to_TShareInfo(cx, ${in_value}, &${out_value})"
+    TUserDeveloperInfo: "ok &= jsval_to_TUserDeveloperInfo(cx, ${in_value}, &${out_value})"
+    TSocialDeveloperInfo: "ok &= jsval_to_TSocialDeveloperInfo(cx, ${in_value}, &${out_value})"
+    TAchievementInfo: "ok &= jsval_to_TAchievementInfo(cx, ${in_value}, &${out_value})"
     LogEventParamMap*: |
       LogEventParamMap ${out_value}_tmp;
       ${($level + 0) * '\t'}do {

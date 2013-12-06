@@ -16,13 +16,13 @@ getPluginName : function () {},
 
 /**
  * @method getPluginVersion
- * @return A value converted from C/C++ "const char*"
+ * @return A value converted from C/C++ "std::string"
  */
 getPluginVersion : function () {},
 
 /**
  * @method getSDKVersion
- * @return A value converted from C/C++ "const char*"
+ * @return A value converted from C/C++ "std::string"
  */
 getSDKVersion : function () {},
 
@@ -154,23 +154,21 @@ plugin.ProtocolAds = {
 
 /**
  * @method showAds
- * @param {cocos2d::plugin::ProtocolAds::AdsType}
- * @param {int}
+ * @param {TAdsInfo}
  * @param {cocos2d::plugin::ProtocolAds::AdsPos}
  */
 showAds : function () {},
 
 /**
  * @method hideAds
- * @param {cocos2d::plugin::ProtocolAds::AdsType}
+ * @param {TAdsInfo}
  */
 hideAds : function () {},
 
 /**
- * @method configDeveloperInfo
- * @param {TAdsDeveloperInfo}
+ * @method queryPoints
  */
-configDeveloperInfo : function () {},
+queryPoints : function () {},
 
 /**
  * @method spendPoints
@@ -179,24 +177,23 @@ configDeveloperInfo : function () {},
 spendPoints : function () {},
 
 /**
- * @method onAdsResult
- * @param {cocos2d::plugin::AdsResultCode}
- * @param {const char*}
+ * @method configDeveloperInfo
+ * @param {TAdsDeveloperInfo}
  */
-onAdsResult : function () {},
+configDeveloperInfo : function () {},
 
 /**
- * @method onPlayerGetPoints
- * @param {int}
+ * @method getAdsListener
+ * @return A value converted from C/C++ "cocos2d::plugin::AdsListener*"
  */
-onPlayerGetPoints : function () {},
+getAdsListener : function () {},
 
 };
 
 /**
- * @class ProtocolSocial
+ * @class ProtocolShare
  */
-plugin.ProtocolSocial = {
+plugin.ProtocolShare = {
 
 /**
  * @method onShareResult
@@ -213,8 +210,80 @@ share : function () {},
 
 /**
  * @method configDeveloperInfo
+ * @param {TShareDeveloperInfo}
+ */
+configDeveloperInfo : function () {},
+
+};
+
+/**
+ * @class ProtocolSocial
+ */
+plugin.ProtocolSocial = {
+
+/**
+ * @method showLeaderboard
+ * @param {const char*}
+ */
+showLeaderboard : function () {},
+
+/**
+ * @method showAchievements
+ */
+showAchievements : function () {},
+
+/**
+ * @method submitScore
+ * @param {const char*}
+ * @param {long}
+ */
+submitScore : function () {},
+
+/**
+ * @method configDeveloperInfo
  * @param {TSocialDeveloperInfo}
  */
 configDeveloperInfo : function () {},
+
+/**
+ * @method unlockAchievement
+ * @param {TAchievementInfo}
+ */
+unlockAchievement : function () {},
+
+};
+
+/**
+ * @class ProtocolUser
+ */
+plugin.ProtocolUser = {
+
+/**
+ * @method isLogined
+ * @return A value converted from C/C++ "bool"
+ */
+isLogined : function () {},
+
+/**
+ * @method logout
+ */
+logout : function () {},
+
+/**
+ * @method configDeveloperInfo
+ * @param {TUserDeveloperInfo}
+ */
+configDeveloperInfo : function () {},
+
+/**
+ * @method login
+ */
+login : function () {},
+
+/**
+ * @method getSessionID
+ * @return A value converted from C/C++ "std::string"
+ */
+getSessionID : function () {},
 
 };

@@ -119,7 +119,7 @@ void js_register_pluginx_protocols_PluginParam(JSContext *cx, JSObject *global) 
 	jsb_PluginParam_class = (JSClass *)calloc(1, sizeof(JSClass));
 	jsb_PluginParam_class->name = "PluginParam";
 	jsb_PluginParam_class->addProperty = JS_PropertyStub;
-	jsb_PluginParam_class->delProperty = JS_PropertyStub;
+	jsb_PluginParam_class->delProperty = JS_DeletePropertyStub;
 	jsb_PluginParam_class->getProperty = JS_PropertyStub;
 	jsb_PluginParam_class->setProperty = JS_StrictPropertyStub;
 	jsb_PluginParam_class->enumerate = JS_EnumerateStub;
@@ -224,9 +224,9 @@ JSBool js_pluginx_PluginProtocol_callStringFuncWithParam(JSContext *cx, uint32_t
         JSObject *obj = JS_THIS_OBJECT(cx, vp);
         js_proxy_t *proxy; JS_GET_NATIVE_PROXY(proxy, obj);
         cocos2d::plugin::PluginProtocol* cobj = (cocos2d::plugin::PluginProtocol *)(proxy ? proxy->ptr : NULL);
-        const char* ret = cobj->callStringFuncWithParam(strName.c_str(), params);
+        std::string ret = cobj->callStringFuncWithParam(strName.c_str(), params);
 		jsval jsret;
-		jsret = c_string_to_jsval(cx, ret);
+		jsret = std_string_to_jsval(cx, ret);
 		JS_SET_RVAL(cx, vp, jsret);
 		return JS_TRUE;
 	}
