@@ -1,6 +1,7 @@
 /****************************************************************************
-Copyright (c) 2012-2013 cocos2d-x.org
-
+Copyright (c) 2013 nickflink
+Copyright (c) 2014 martell malone <martell malone at  mail dot com>
+Copyright (c) 2014 cocos2d-x.org
 http://www.cocos2d-x.org
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -21,6 +22,10 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
+
+// NB. All Util classes are From google Jan 2014 and a subject to their respective Apache License 
+// (We can update to newer versions when they are added)
+
 package org.cocos2dx.plugin;
 
 import android.app.Activity;
@@ -35,6 +40,7 @@ import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.preference.PreferenceManager.OnActivityResultListener;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -50,126 +56,117 @@ import org.cocos2dx.plugin.util.IabResult;
 import org.cocos2dx.plugin.util.Inventory;
 import org.cocos2dx.plugin.util.Purchase;
 
-public class IAPGooglePlay implements InterfaceIAP {
 
-	// Debug tag, for logging
-	private static final String TAG = "IAPGooglePlay";
+public class IAPGooglePlay implements InterfaceIAP, OnActivityResultListener {
 
-	// (arbitrary) request code for the purchase flow
-	static final int RC_REQUEST = 10001;
+    // Debug tag, for logging
+    static final String TAG = "IAPGooglePlay";
 
-	// The helper object
-	private IabHelper mHelper;
-	private static Context mContext = null;
-	private static boolean bDebug = false;
-	private static Handler mHandler = null;
-	private static IAPGooglePlay mAdapter = null;
+    // (arbitrary) request code for the purchase flow
+    static final int RC_REQUEST = 10001;
 
-	protected static void LogE(String msg, Exception e) {
-		Log.e(TAG, msg, e);
-		e.printStackTrace();
-	}
+    private static Context mContext = null;
+    private static boolean bDebug = false;
+    //private static Handler mHandler = null;
+    private static IAPGooglePlay mAdapter = null;
 
-	protected static void LogD(String msg) {
-		if (bDebug) {
-			Log.d(TAG, msg);
-		}
-	}
+    // The helper object
+    IabHelper mHelper;
 
-	public IAPGooglePlay(Context context) {
-		mContext = context;
-		mAdapter = this;
-	}
 
-	private Context getContext() {
-		return mContext;
-	}
+    protected static void LogE(String msg, Exception e) {
+        Log.e(TAG, msg, e);
+        e.printStackTrace();
+    }
 
-	private Activity getActivity() {
-			return (Activity) mContext;
-	}
+    protected static void LogD(String msg) {
+        if (bDebug) {
+            Log.d(TAG, msg);
+        }
+    }
 
-	@Override
-	public void configDeveloperInfo(Hashtable<String, String> cpInfo) {
-		LogD("initDeveloperInfo invoked " + cpInfo.toString());
-		try {
-			//String appId = cpInfo.get("GooglePlayAppId");
-			final String appKey = cpInfo.get("GooglePlayAppKey");
-			PluginWrapper.runOnMainThread(new Runnable() {
-				@Override
-				public void run() {
-					initWithKey(appKey);
-				}
-			});
-		} catch (Exception e) {
-			LogE("Developer info is wrong!", e);
-		}
-	}
+    public IAPGooglePlay(Context context) {
+        mContext = context;
+        mAdapter = this;
+    }
 
-	@Override
-	public void payForProduct(Hashtable<String, String> info) {
-		LogD("payForProduct invoked " + info.toString());
-		if (! networkReachable()) {
-			payResult(IAPWrapper.PAYRESULT_FAIL, "Network Unreachable");
-			return;
-		}
+    private Context getContext() {
+        return mContext;
+    }
 
-		final Hashtable<String, String> productInfo = info;
-		PluginWrapper.runOnMainThread(new Runnable() {
-			@Override
-			public void run() {
-				String iapId = productInfo.get("IAPId");
-				String iapSecKey = productInfo.get("IAPSecKey");
-				mHelper.launchPurchaseFlow(getActivity(), iapId, RC_REQUEST, mPurchaseFinishedListener, iapSecKey);
-			}
-		});
-	}
+    private Activity getActivity() {
+        return (Activity) mContext;
+    }
 
-	@Override
-	public void setDebugMode(boolean debug) {
-		bDebug = debug;
-		mHelper.enableDebugLogging(debug);
-	}
+    @Override
+    public void configDeveloperInfo(Hashtable<String, String> cpInfo) {
+        LogD("initDeveloperInfo invoked " + cpInfo.toString());
+        try {
+            //String appId = cpInfo.get("GooglePlayAppId");
+            final String appKey = cpInfo.get("GooglePlayAppKey");
+            PluginWrapper.runOnMainThread(new Runnable() {
+                @Override
+                public void run() {
+                    initWithKey(appKey);
+                }
+            });
+        } catch (Exception e) {
+            LogE("Developer info is wrong!", e);
+        }
+    }
 
-	@Override
-	public String getSDKVersion() {
-		return "Unknown version";
-	}
+    @Override
+    public void payForProduct(Hashtable<String, String> info) {
+        LogD("payForProduct invoked " + info.toString());
+        if (! networkReachable()) {
+            payResult(IAPWrapper.PAYRESULT_FAIL, "Network Unreachable");
+            return;
+        }
 
-	//private ProgressDialog mProgress = null;
-	//void closeProgress() {
-	//	try {
-	//		if (mProgress != null) {
-	//			mProgress.dismiss();
-	//			mProgress = null;
-	//		}
-	//	} catch (Exception e) {
-	//		e.printStackTrace();
-	//	}
-	//}
+        final Hashtable<String, String> productInfo = info;
+        PluginWrapper.runOnMainThread(new Runnable() {
+            @Override
+            public void run() {
+                String iapId = productInfo.get("IAPId");
+                String iapSecKey = productInfo.get("IAPSecKey");
+                mHelper.launchPurchaseFlow(getActivity(), iapId, RC_REQUEST, mPurchaseFinishedListener, iapSecKey);
+            }
+        });
+    }
 
-	private boolean networkReachable() {
-		boolean bRet = false;
-		try {
-			ConnectivityManager conn = (ConnectivityManager)mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
-			NetworkInfo netInfo = conn.getActiveNetworkInfo();
-			bRet = (null == netInfo) ? false : netInfo.isAvailable();
-		} catch (Exception e) {
-			LogE("Fail to check network status", e);
-		}
-		LogD("NetWork reachable : " + bRet);
-		return bRet;
-	}
+    @Override
+    public void setDebugMode(boolean debug) {
+        bDebug = debug;
+        mHelper.enableDebugLogging(debug);
+    }
 
-	private static void payResult(int ret, String msg) {
-		IAPWrapper.onPayResult(mAdapter, ret, msg);
-		LogD("GooglePlay result : " + ret + " msg : " + msg);
-	}
+    @Override
+    public String getSDKVersion() {
+        return "IAPv3Jan2014";
+    }
 
-	@Override
-	public String getPluginVersion() {
-		return "0.2.0";
-	}
+    private boolean networkReachable() {
+        boolean bRet = false;
+        try {
+            ConnectivityManager conn = (ConnectivityManager)mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo netInfo = conn.getActiveNetworkInfo();
+            bRet = (null == netInfo) ? false : netInfo.isAvailable();
+        } catch (Exception e) {
+            LogE("Fail to check network status", e);
+        }
+        LogD("NetWork reachable : " + bRet);
+        return bRet;
+    }
+
+    private static void payResult(int ret, String msg) {
+        IAPWrapper.onPayResult(mAdapter, ret, msg);
+        LogD("GooglePlay result : " + ret + " msg : " + msg);
+    }
+
+    @Override
+    public String getPluginVersion() {
+        return "0.3.0";
+    }
 
     /* base64EncodedPublicKey should be YOUR APPLICATION'S PUBLIC KEY
      * (that you got from the Google Play developer console). This is not your
@@ -183,16 +180,15 @@ public class IAPGooglePlay implements InterfaceIAP {
      * of their own and then fake messages from the server.
      */
     public void initWithKey(String base64EncodedPublicKey) {
-        // load game data
-        //loadData();
-
+        
         // Create the helper, passing it our context and the public key to verify signatures with
         Log.d(TAG, "Creating IAB helper.");
         //mHelper = new IabHelper(this, base64EncodedPublicKey);
         mHelper = new IabHelper(getContext(), base64EncodedPublicKey);
 
-        // enable debug logging (for a production application, you should set this to false).
-        mHelper.enableDebugLogging(true);
+        //must add to the cocos listener que
+        //look at usage.txt if this line fails
+        //Cocos2dxActivity.addOnActivityResultListener(this);
 
         // Start setup. This is asynchronous and the specified listener
         // will be called once setup completes.
@@ -214,18 +210,27 @@ public class IAPGooglePlay implements InterfaceIAP {
         });
     }
 
+
+
     // Listener that's called when we finish querying the items and subscriptions we own
     IabHelper.QueryInventoryFinishedListener mGotInventoryListener = new IabHelper.QueryInventoryFinishedListener() {
         public void onQueryInventoryFinished(IabResult result, Inventory inventory) {
             Log.d(TAG, "Query inventory finished.");
+
+            // Have we been disposed of in the meantime? If so, quit.
+            if (mHelper == null) return;
+
+            // Is it a failure?
             if (result.isFailure()) {
-                Log.e(TAG,"Failed to query inventory: " + result);
+                Log.e(TAG, "Failed to query inventory: " + result);
                 return;
             }
 
             Log.d(TAG, "Query inventory was successful.");
-            setWaitScreen(false);
-            Log.d(TAG, "Initial inventory query finished; enabling main UI.");
+
+            //start. you can add you own query code here for flushing if you wish
+
+            //end
         }
     };
 
@@ -237,8 +242,9 @@ public class IAPGooglePlay implements InterfaceIAP {
     /**
      * Handle activity result. Call this method from your Activity's
      * onActivityResult callback.
+     * @return 
      */
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+    public boolean onActivityResult(int requestCode, int resultCode, Intent data) {
         LogD("onActivityResult("+requestCode+", "+resultCode+", data)");
         boolean handled = mHelper.handleActivityResult(requestCode, resultCode, data);
         if(handled) {
@@ -246,57 +252,56 @@ public class IAPGooglePlay implements InterfaceIAP {
         } else {
             LogD("handled = FALSE");
         }
+        return handled;
     }
-    
+
     /** Verifies the developer payload of a purchase. */
     boolean verifyDeveloperPayload(Purchase p) {
         String payload = p.getDeveloperPayload();
-        
+
         /*
          * TODO: verify that the developer payload of the purchase is correct. It will be
          * the same one that you sent when initiating the purchase.
-         * 
-         * WARNING: Locally generating a random string when starting a purchase and 
-         * verifying it here might seem like a good approach, but this will fail in the 
-         * case where the user purchases an item on one device and then uses your app on 
+         *
+         * WARNING: Locally generating a random string when starting a purchase and
+         * verifying it here might seem like a good approach, but this will fail in the
+         * case where the user purchases an item on one device and then uses your app on
          * a different device, because on the other device you will not have access to the
          * random string you originally generated.
          *
          * So a good developer payload has these characteristics:
-         * 
+         *
          * 1. If two different users purchase an item, the payload is different between them,
          *    so that one user's purchase can't be replayed to another user.
-         * 
+         *
          * 2. The payload must be such that you can verify it even when the app wasn't the
-         *    one who initiated the purchase flow (so that items purchased by the user on 
+         *    one who initiated the purchase flow (so that items purchased by the user on
          *    one device work on other devices owned by the user).
-         * 
+         *
          * Using your own server to store and verify developer payloads across app
          * installations is recommended.
          */
-        
+
         return true;
     }
 
     // Callback for when a purchase is finished
     IabHelper.OnIabPurchaseFinishedListener mPurchaseFinishedListener = new IabHelper.OnIabPurchaseFinishedListener() {
+        @Override
         public void onIabPurchaseFinished(IabResult result, Purchase purchase) {
-            Log.d(TAG, "Purchase finished: " + result + ", purchase: " + purchase);
+            //System.out.println("Purchase Finish heard something");
+   
+            
             if (result.isFailure()) {
-                Log.e(TAG,"Error purchasing: " + result);
-                failPurchase();
-                setWaitScreen(false);
-                return;
+                 Log.d(TAG, "Error purchasing: " + result);
+                 return;
             }
-            if (!verifyDeveloperPayload(purchase)) {
-                Log.e(TAG,"Error purchasing. Authenticity verification failed.");
-                failPurchase();
-                setWaitScreen(false);
-                return;
+            else {
+                Log.d(TAG,"Success!");
+                
+                succeedPurchase();
+                mHelper.consumeAsync(purchase, mConsumeFinishedListener);
             }
-
-            Log.d(TAG, "Purchase successful.");
-            succeedPurchase();
         }
     };
 
@@ -317,13 +322,12 @@ public class IAPGooglePlay implements InterfaceIAP {
     };
 
     void succeedPurchase() {
-        IAPWrapper.onPayResult(this, IAPWrapper.PAYRESULT_SUCCESS, "");
-        //onPurchaseSucceeded();
+        IAPWrapper.onPayResult(mAdapter, IAPWrapper.PAYRESULT_SUCCESS, "");
+        
     }
 
     void failPurchase() {
-        IAPWrapper.onPayResult(this, IAPWrapper.PAYRESULT_FAIL, "");
-        //onPurchaseFailed();
+        IAPWrapper.onPayResult(mAdapter, IAPWrapper.PAYRESULT_FAIL, "");
     }
 
     // Enables or disables the "please wait" screen.
