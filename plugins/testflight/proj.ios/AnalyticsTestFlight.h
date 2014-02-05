@@ -23,7 +23,7 @@ THE SOFTWARE.
 ****************************************************************************/
 #import "InterfaceAnalytics.h"
 
-@interface AnalyticsFlurry : NSObject <InterfaceAnalytics>
+@interface AnalyticsTestFlight : NSObject <InterfaceAnalytics>
 {
     
 }
@@ -45,17 +45,5 @@ THE SOFTWARE.
 - (void) logTimedEventEnd: (NSString*) eventId;
 - (NSString*) getSDKVersion;
 - (NSString*) getPluginVersion;
-
-/**
- interfaces of flurry SDK
- */
-- (void) setAge: (NSNumber*) age;
-- (void) setGender: (NSNumber*) gender;
-- (void) setUserId: (NSString*) userId;
-- (void) setUseHttps: (NSNumber*) enabled;
-- (void) logPageView;
-- (void) setVersionName: (NSString*) versionName;
-- (void) logTimedEventBeginWithParams: (NSMutableDictionary*) params;
-- (void) logTimedEventEndWithParams: (NSMutableDictionary*) params;
 
 @end
