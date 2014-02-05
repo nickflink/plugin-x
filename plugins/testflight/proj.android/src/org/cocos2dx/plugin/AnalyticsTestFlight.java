@@ -28,10 +28,11 @@ import java.util.Iterator;
 
 import org.json.JSONObject;
 
+import android.app.Application;
 import android.content.Context;
 import android.util.Log;
 
-import com.testflightapp.lib.TestFlight
+import com.testflightapp.lib.TestFlight;
 
 public class AnalyticsTestFlight implements InterfaceAnalytics {
 
@@ -58,7 +59,7 @@ public class AnalyticsTestFlight implements InterfaceAnalytics {
     public void startSession(String appKey) {
         LogD("startSession invoked!");
         final String curKey = appKey;
-        final String appToken = mContext.getString(R.string.testflightAppToken);
+        //final String appToken = mContext.getString(R.string.testflightAppToken);
         PluginWrapper.runOnMainThread(new Runnable() {
             @Override
             public void run() {
@@ -67,7 +68,7 @@ public class AnalyticsTestFlight implements InterfaceAnalytics {
                 } catch (ClassNotFoundException e) {
                    e.printStackTrace();
                 }
-                TestFlight.takeOff(mContext, curKey);
+                TestFlight.takeOff((Application)mContext, curKey);
             }
             
         });
