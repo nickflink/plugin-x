@@ -7,10 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		01A07EC318A2E5BC00189DD6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01A07EC218A2E5BC00189DD6 /* Foundation.framework */; };
-		01A07EC718A2E76800189DD6 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FAB6DFDB1756F22200C90D89 /* libTestFlight.a */; };
-		01A07EC918A2E7F200189DD6 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 01A07EC818A2E7F200189DD6 /* libz.dylib */; };
-		FAB6DFE01756F29800C90D89 /* AnalyticsTestFlight.m in Sources */ = {isa = PBXBuildFile; fileRef = FAB6DFDF1756F29800C90D89 /* AnalyticsTestFlight.m */; };
+		012CD21B18B8C970003DB3AB /* AnalyticsTestFlight.m in Sources */ = {isa = PBXBuildFile; fileRef = 012CD21518B8C970003DB3AB /* AnalyticsTestFlight.m */; };
+		012CD21C18B8C970003DB3AB /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 012CD21618B8C970003DB3AB /* libTestFlight.a */; };
+		012CD21E18B8CACD003DB3AB /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 012CD21D18B8CACC003DB3AB /* libz.dylib */; };
+		FA09A376168AFD41008C1C7B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA09A375168AFD41008C1C7B /* Foundation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -26,16 +26,16 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		01A07EC118A2E15800189DD6 /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFlight.h; sourceTree = "<group>"; };
-		01A07EC218A2E5BC00189DD6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		01A07EC418A2E5CC00189DD6 /* PluginTestFlight-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PluginTestFlight-Prefix.pch"; sourceTree = "<group>"; };
-		01A07EC518A2E65E00189DD6 /* TestFlight+AsyncLogging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TestFlight+AsyncLogging.h"; sourceTree = "<group>"; };
-		01A07EC618A2E65E00189DD6 /* TestFlight+ManualSessions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TestFlight+ManualSessions.h"; sourceTree = "<group>"; };
-		01A07EC818A2E7F200189DD6 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		012CD21418B8C970003DB3AB /* AnalyticsTestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnalyticsTestFlight.h; sourceTree = "<group>"; };
+		012CD21518B8C970003DB3AB /* AnalyticsTestFlight.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnalyticsTestFlight.m; sourceTree = "<group>"; };
+		012CD21618B8C970003DB3AB /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTestFlight.a; sourceTree = "<group>"; };
+		012CD21718B8C970003DB3AB /* PluginTestFlight-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PluginTestFlight-Prefix.pch"; sourceTree = "<group>"; };
+		012CD21818B8C970003DB3AB /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFlight.h; sourceTree = "<group>"; };
+		012CD21918B8C970003DB3AB /* TestFlight+AsyncLogging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TestFlight+AsyncLogging.h"; sourceTree = "<group>"; };
+		012CD21A18B8C970003DB3AB /* TestFlight+ManualSessions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TestFlight+ManualSessions.h"; sourceTree = "<group>"; };
+		012CD21D18B8CACC003DB3AB /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		FA09A372168AFD41008C1C7B /* libPluginTestFlight.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPluginTestFlight.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		FAB6DFDB1756F22200C90D89 /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTestFlight.a; sourceTree = "<group>"; };
-		FAB6DFDE1756F29800C90D89 /* AnalyticsTestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnalyticsTestFlight.h; sourceTree = "<group>"; };
-		FAB6DFDF1756F29800C90D89 /* AnalyticsTestFlight.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnalyticsTestFlight.m; sourceTree = "<group>"; };
+		FA09A375168AFD41008C1C7B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,9 +43,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				01A07EC918A2E7F200189DD6 /* libz.dylib in Frameworks */,
-				01A07EC718A2E76800189DD6 /* libTestFlight.a in Frameworks */,
-				01A07EC318A2E5BC00189DD6 /* Foundation.framework in Frameworks */,
+				012CD21E18B8CACD003DB3AB /* libz.dylib in Frameworks */,
+				FA09A376168AFD41008C1C7B /* Foundation.framework in Frameworks */,
+				012CD21C18B8C970003DB3AB /* libTestFlight.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -55,13 +55,14 @@
 		FA09A367168AFD41008C1C7B = {
 			isa = PBXGroup;
 			children = (
-				01A07EC818A2E7F200189DD6 /* libz.dylib */,
-				01A07EC518A2E65E00189DD6 /* TestFlight+AsyncLogging.h */,
-				01A07EC618A2E65E00189DD6 /* TestFlight+ManualSessions.h */,
-				01A07EC418A2E5CC00189DD6 /* PluginTestFlight-Prefix.pch */,
-				01A07EC118A2E15800189DD6 /* TestFlight.h */,
-				FAB6DFDE1756F29800C90D89 /* AnalyticsTestFlight.h */,
-				FAB6DFDF1756F29800C90D89 /* AnalyticsTestFlight.m */,
+				012CD21418B8C970003DB3AB /* AnalyticsTestFlight.h */,
+				012CD21518B8C970003DB3AB /* AnalyticsTestFlight.m */,
+				012CD21718B8C970003DB3AB /* PluginTestFlight-Prefix.pch */,
+				012CD21818B8C970003DB3AB /* TestFlight.h */,
+				012CD21918B8C970003DB3AB /* TestFlight+AsyncLogging.h */,
+				012CD21A18B8C970003DB3AB /* TestFlight+ManualSessions.h */,
+				012CD21618B8C970003DB3AB /* libTestFlight.a */,
+				012CD21D18B8CACC003DB3AB /* libz.dylib */,
 				FA09A374168AFD41008C1C7B /* Frameworks */,
 				FA09A373168AFD41008C1C7B /* Products */,
 			);
@@ -78,8 +79,7 @@
 		FA09A374168AFD41008C1C7B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				01A07EC218A2E5BC00189DD6 /* Foundation.framework */,
-				FAB6DFDB1756F22200C90D89 /* libTestFlight.a */,
+				FA09A375168AFD41008C1C7B /* Foundation.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -135,7 +135,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FAB6DFE01756F29800C90D89 /* AnalyticsTestFlight.m in Sources */,
+				012CD21B18B8C970003DB3AB /* AnalyticsTestFlight.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
