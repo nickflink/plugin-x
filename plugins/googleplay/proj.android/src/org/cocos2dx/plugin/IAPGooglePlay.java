@@ -61,18 +61,18 @@ public class IAPGooglePlay implements InterfaceIAP, OnActivityResultListener {
 
     // Debug tag, for logging
     static final String TAG = "IAPGooglePlay";
+    private static Cocos2dxActivity mCocos2dxActivity = null;
+    private static Context mContext = null;
+    private static InterfaceIAP mAdapter = null;
+    private static boolean bDebug = false;
+    //private static Handler mHandler = null;
+
 
     // (arbitrary) request code for the purchase flow
     static final int RC_REQUEST = 10001;
 
-    private static Context mContext = null;
-    private static boolean bDebug = false;
-    //private static Handler mHandler = null;
-    private static IAPGooglePlay mAdapter = null;
-
     // The helper object
     IabHelper mHelper;
-
 
     protected static void LogE(String msg, Exception e) {
         Log.e(TAG, msg, e);
@@ -85,8 +85,9 @@ public class IAPGooglePlay implements InterfaceIAP, OnActivityResultListener {
         }
     }
 
-    public IAPGooglePlay(Context context) {
-        mContext = context;
+    public IAPGooglePlay(Cocos2dxActivity activity) {
+        mCocos2dxActivity = activity;
+        mContext = (Context)activity;
         mAdapter = this;
     }
 
@@ -95,7 +96,7 @@ public class IAPGooglePlay implements InterfaceIAP, OnActivityResultListener {
     }
 
     private Activity getActivity() {
-        return (Activity) mContext;
+            return (Activity) mCocos2dxActivity;
     }
 
     @Override
@@ -182,20 +183,21 @@ public class IAPGooglePlay implements InterfaceIAP, OnActivityResultListener {
     public void initWithKey(String base64EncodedPublicKey) {
         
         // Create the helper, passing it our context and the public key to verify signatures with
-        Log.d(TAG, "Creating IAB helper.");
+        LogD("Creating IAB helper.");
         //mHelper = new IabHelper(this, base64EncodedPublicKey);
         mHelper = new IabHelper(getContext(), base64EncodedPublicKey);
 
         //must add to the cocos listener que
         //look at usage.txt if this line fails
-        //Cocos2dxActivity.addOnActivityResultListener(this);
+        mCocos2dxActivity.addOnActivityResultListener(this);
+        
 
         // Start setup. This is asynchronous and the specified listener
         // will be called once setup completes.
-        Log.d(TAG, "Starting setup.");
+        LogD("Starting setup.");
         mHelper.startSetup(new IabHelper.OnIabSetupFinishedListener() {
             public void onIabSetupFinished(IabResult result) {
-                Log.d(TAG, "Setup finished.");
+                LogD("Setup finished.");
 
                 if (!result.isSuccess()) {
                     // Oh noes, there was a problem.
@@ -204,7 +206,7 @@ public class IAPGooglePlay implements InterfaceIAP, OnActivityResultListener {
                 }
 
                 // Hooray, IAB is fully set up. Now, let's get an inventory of stuff we own.
-                Log.d(TAG, "Setup successful. Querying inventory.");
+                LogD("Setup successful. Querying inventory.");
                 mHelper.queryInventoryAsync(mGotInventoryListener);
             }
         });
@@ -215,18 +217,18 @@ public class IAPGooglePlay implements InterfaceIAP, OnActivityResultListener {
     // Listener that's called when we finish querying the items and subscriptions we own
     IabHelper.QueryInventoryFinishedListener mGotInventoryListener = new IabHelper.QueryInventoryFinishedListener() {
         public void onQueryInventoryFinished(IabResult result, Inventory inventory) {
-            Log.d(TAG, "Query inventory finished.");
+            LogD("Query inventory finished.");
 
             // Have we been disposed of in the meantime? If so, quit.
             if (mHelper == null) return;
 
             // Is it a failure?
             if (result.isFailure()) {
-                Log.e(TAG, "Failed to query inventory: " + result);
+                LogD("Error: Failed to query inventory: " + result);
                 return;
             }
 
-            Log.d(TAG, "Query inventory was successful.");
+            LogD("Query inventory was successful.");
 
             //start. you can add you own query code here for flushing if you wish
 

@@ -6,7 +6,7 @@
 
     <application android:icon="@drawable/icon" android:label="@string/app_name">
 
-        <activity android:name="android.app.NativeActivity"
+        <activity android:name="org.cocos2dx.HelloPlugins.HelloPluginsActivity"
                   android:label="@string/app_name"
                   android:screenOrientation="landscape"
                   android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
