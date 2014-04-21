@@ -73,10 +73,9 @@
            result:(id)result
             error:(NSError *)error {
     NSLog(@"IAPAppStore::showAlert");
-    NSString *alertMsg;
-    NSString *alertTitle;
+    NSString *alertTitle = @"Alert";
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:alertTitle
-                                                        message:alertMsg
+                                                        message:message
                                                        delegate:nil
                                               cancelButtonTitle:@"OK"
                                               otherButtonTitles:nil];
