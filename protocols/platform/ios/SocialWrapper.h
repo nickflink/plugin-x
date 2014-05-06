@@ -34,6 +34,9 @@ typedef enum {
     kSignInSuccess,
     kSignInFailed,
   
+    kLeaderboardClosed,
+    kAchievementClosed
+  
 } SocialResult;
 
 @interface SocialWrapper : NSObject

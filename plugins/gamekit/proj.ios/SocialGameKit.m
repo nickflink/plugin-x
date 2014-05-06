@@ -563,6 +563,8 @@
 -(void) leaderboardViewControllerDidFinish:(GKLeaderboardViewController*)viewController
 {
     [viewController dismissViewControllerAnimated:YES completion:nil];
+    [SocialWrapper onSocialResult:self withRet:kLeaderboardClosed withMsg:@""];
+
 }
 
 
@@ -571,6 +573,7 @@
 -(void) achievementViewControllerDidFinish:(GKAchievementViewController *)viewController
 {
     [viewController dismissViewControllerAnimated:YES completion:nil];
+    [SocialWrapper onSocialResult:self withRet:kAchievementClosed withMsg:@""];
 }
 
 @end

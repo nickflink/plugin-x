@@ -45,7 +45,10 @@ typedef enum
   
     SIGN_IN_SUCCESS,
     SIGN_IN_FAILED,
-
+  
+    LEADERBOARD_CLOSED,
+    ACHIEVEMENT_CLOSED,
+  
 } SocialRetCode;
 
 class SocialListener
