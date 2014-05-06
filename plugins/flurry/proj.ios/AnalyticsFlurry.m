@@ -32,6 +32,10 @@ THE SOFTWARE.
 
 - (void) startSession: (NSString*) appKey
 {
+    if(self.debug)
+    {
+        [Flurry setCrashReportingEnabled:YES];
+    }
     [Flurry startSession:appKey];
 }
 
