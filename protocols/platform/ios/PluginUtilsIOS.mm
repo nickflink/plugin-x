@@ -208,15 +208,17 @@ void PluginUtilsIOS::callOCFunctionWithName(PluginProtocol* pPlugin, const char*
 int PluginUtilsIOS::callOCIntFunctionWithName_oneParam(PluginProtocol* pPlugin, const char* funcName, id param)
 {
     NSNumber* num = (NSNumber*) callRetFunctionWithParam(pPlugin, funcName, param);
-    int ret = [num integerValue];
-    return ret;
+    long ret = [num integerValue];
+    assert(ret < INT_MAX);
+    return (int)ret;
 }
 
 int PluginUtilsIOS::callOCIntFunctionWithName(PluginProtocol* pPlugin, const char* funcName)
 {
     NSNumber* num = (NSNumber*) callRetFunction(pPlugin, funcName);
-    int ret = [num integerValue];
-    return ret;
+    long ret = [num integerValue];
+    assert(ret < INT_MAX);
+    return (int)ret;
 }
 
 float PluginUtilsIOS::callOCFloatFunctionWithName_oneParam(PluginProtocol* pPlugin, const char* funcName, id param)

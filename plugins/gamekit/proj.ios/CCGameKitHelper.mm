@@ -226,7 +226,7 @@
         return;
     }
     
-    if (ABGAMEKITHELPER_LOGGING) NSLog(@"CCGameKitHelper: Attempting to report %i cached scores...", scores.count);
+    if (ABGAMEKITHELPER_LOGGING) NSLog(@"CCGameKitHelper: Attempting to report %lu cached scores...", (unsigned long)scores.count);
     
     //iOS 6.x+
     if (IS_MIN_IOS6)
@@ -235,11 +235,11 @@
             if (!error)
             {
                 [self removeAllCachedScores];
-                if (ABGAMEKITHELPER_LOGGING) NSLog(@"CCGameKitHelper: Reported %i cached score(s) successfully.", scores.count);
+                if (ABGAMEKITHELPER_LOGGING) NSLog(@"CCGameKitHelper: Reported %lu cached score(s) successfully.", (unsigned long)scores.count);
             }
             else
             {
-                if (ABGAMEKITHELPER_LOGGING) NSLog(@"CCGameKitHelper: ERROR -> Failed to report %i cached score(s).", scores.count);
+                if (ABGAMEKITHELPER_LOGGING) NSLog(@"CCGameKitHelper: ERROR -> Failed to report %lu cached score(s).", (unsigned long)scores.count);
             }
         }];
     }
@@ -298,7 +298,7 @@
         return;
     }
     
-    if (ABGAMEKITHELPER_LOGGING) NSLog(@"CCGameKitHelper: Attempting to report %i cached achievements...", achievements.count);
+    if (ABGAMEKITHELPER_LOGGING) NSLog(@"CCGameKitHelper: Attempting to report %lu cached achievements...", (unsigned long)achievements.count);
     
     //iOS 6.x +
     if (IS_MIN_IOS6)
@@ -307,11 +307,11 @@
             if (!error)
             {
                 [self removeAllCachedAchievements];
-                if (ABGAMEKITHELPER_LOGGING) NSLog(@"CCGameKitHelper: Reported %i cached achievement(s) successfully.", achievements.count);
+                if (ABGAMEKITHELPER_LOGGING) NSLog(@"CCGameKitHelper: Reported %lu cached achievement(s) successfully.", (unsigned long)achievements.count);
             }
             else
             {
-                if (ABGAMEKITHELPER_LOGGING) NSLog(@"CCGameKitHelper: ERROR -> Failed to report %i cached achievement(s).", achievements.count);
+                if (ABGAMEKITHELPER_LOGGING) NSLog(@"CCGameKitHelper: ERROR -> Failed to report %lu cached achievement(s).", (unsigned long)achievements.count);
             }
         }];
     }
@@ -462,7 +462,7 @@
     return topController;
 }
 
--(NSData*) makeCryptedVersionOfData:(NSData*)data withKeyData:(const void*)keyData ofLength:(int) keyLength decrypt:(bool)decrypt
+-(NSData*) makeCryptedVersionOfData:(NSData*)data withKeyData:(const void*)keyData ofLength:(NSUInteger) keyLength decrypt:(bool)decrypt
 {
 	int keySize = kCCKeySizeAES256;
     char key[kCCKeySizeAES256];

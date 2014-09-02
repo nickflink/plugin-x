@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		014AD63317B82504007E0C2E /* SocialGameKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 014AD63217B82504007E0C2E /* SocialGameKit.m */; };
-		014AD63417B8251A007E0C2E /* SocialGameKit.h in Sources */ = {isa = PBXBuildFile; fileRef = 014AD63117B82504007E0C2E /* SocialGameKit.h */; };
 		01AF46A617C9072400EDEBF8 /* CCGameKitHelper.mm in Sources */ = {isa = PBXBuildFile; fileRef = 01AF46A517C9072400EDEBF8 /* CCGameKitHelper.mm */; };
 		FACAD88C1762C1B500D75ADE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FACAD88B1762C1B500D75ADE /* Foundation.framework */; };
 		FACAD8C41762C64100D75ADE /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FACAD8C31762C64100D75ADE /* UIKit.framework */; };
@@ -131,7 +130,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				014AD63417B8251A007E0C2E /* SocialGameKit.h in Sources */,
 				014AD63317B82504007E0C2E /* SocialGameKit.m in Sources */,
 				01AF46A617C9072400EDEBF8 /* CCGameKitHelper.mm in Sources */,
 			);

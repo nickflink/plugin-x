@@ -58,7 +58,7 @@ if (NULL == pData) {                                                            
     return ret;                                                                                 \
 }                                                                                               \
                                                                                                 \
-int nParamNum = params.size();                                                                  \
+unsigned long nParamNum = params.size();                                                                  \
 if (0 == nParamNum)                                                                             \
 {                                                                                               \
     ret = PluginUtilsIOS::callOC##retCode##FunctionWithName(this, funcName);                    \
