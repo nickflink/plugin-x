@@ -63,7 +63,12 @@ THE SOFTWARE.
 
     UIViewController* controller = [AdsWrapper getCurrentRootViewController];
     if (controller) {
-        [FlurryAds fetchAndDisplayAdForSpace:strSpaceID view:controller.view size:size];
+        //Note: you must call this more than once if the ad is not ready for space
+        if ([FlurryAds adReadyForSpace:strSpaceID]) {
+            [FlurryAds displayAdForSpace:strSpaceID onView:controller.view viewControllerForPresentation:controller];
+        } else {
+            [FlurryAds fetchAdForSpace:strSpaceID frame:controller.view.frame size:size];
+        }
     }
 }
 
@@ -101,7 +106,7 @@ THE SOFTWARE.
 
 - (NSString*) getSDKVersion
 {
-    return @"4.2.1";
+    return @"5.4.0";
 }
 
 - (NSString*) getPluginVersion

@@ -2,7 +2,7 @@
 //  FlurryAdDelegate.h
 //  Flurry
 //
-//  Copyright 2010 - 2012 Flurry, Inc. All rights reserved.
+//  Copyright 2010 - 2013 Flurry, Inc. All rights reserved.
 //
 //  Methods in this header file are for use with Flurry
 //
@@ -10,12 +10,12 @@
 #import <UIKit/UIKit.h>
 
 typedef enum {
-    WEB_BANNER = 1,
-    WEB_TAKEOVER = 2,
-    VIDEO_TAKEOVER = 3,
-    AD_BANNER = 4,
-    AD_TAKEOVER = 5,
-    NETWORK_BANNER = 6,
+    WEB_BANNER      = 1,
+    WEB_TAKEOVER    = 2,
+    VIDEO_TAKEOVER  = 3,
+    AD_BANNER       = 4,
+    AD_TAKEOVER     = 5,
+    NETWORK_BANNER  = 6,
     NETWORK_TAKEOVER = 7
 } FlurryAdType;
 
@@ -28,8 +28,8 @@ typedef enum {
  *  @note This class serves as a delegate for FlurryAds. \n
  *  For additional information on how to use Flurry's Ads SDK to
  *  attract high-quality users and monetize your user base see <a href="http://wiki.flurry.com/index.php?title=Publisher">Support Center - Publisher</a>.
- *  @author 2010 - 2012 Flurry, Inc. All Rights Reserved.
- *  @version 4.2.0
+ *  @author 2010 - 2013 Flurry, Inc. All Rights Reserved.
+ *  @version 4.3.0
  * 
  */
 @protocol FlurryAdDelegate <NSObject>
@@ -81,7 +81,22 @@ typedef enum {
 /*!
  *  @brief [Deprecated] This method is deprecated. -[spaceShouldDisplay:interstitial:] should be used.
  */
-- (BOOL)spaceShouldDisplay:(NSString*)adSpace  forType:(FlurryAdType)type;
+- (BOOL)spaceShouldDisplay:(NSString*)adSpace  forType:(FlurryAdType)type __attribute__ ((deprecated));
+
+/*!
+ *  @brief Invoked when an ad is rendered.
+ *  @since 5.1.0
+ *
+ *  This method informs the user an ad was retrieved, and successful in displaying to the user.
+ *
+ *  @see FlurryAds#displayAdForSpace:view: for details on the method that will invoke this delegate. \n
+ *  FlurryAds#fetchAndDisplayAdForSpace:view:size: for details on the method that will invoke this delegate.
+ *
+ *  @param adSpace The placement of an ad in your app, where placement may
+ *  be splash screen for SPLASH_AD.
+ *  @param interstitial YES/NO if the space to display will be an interstitial.
+ */
+- (void) spaceDidRender:(NSString *)space interstitial:(BOOL)interstitial;
 
 /*!
  *  @brief Invoked when an ad fails to render.
@@ -223,6 +238,15 @@ typedef enum {
  */
 - (NSString *)appSpotInMobiAppKey;
 
+
+/*!
+ *  @brief The FAcebook Audience network APID.
+ *  @since 5.1.0
+ *
+ *  This is the id for your app as set in FB Audience Network developer portal :https://developers.facebook.com
+ */
+- (NSString *)appSpotFANAppPlacementID;
+
 /*!
  *  @brief The AdMob Publisher Id.
  *  @since 4.0.0
@@ -303,7 +327,7 @@ typedef enum {
  *  This method has been deprecated.  Please call FlurryAds#initialze: instead.
  *
  */
-- (id)appSpotRootViewController;
+- (id)appSpotRootViewController __attribute__ ((deprecated));
 
 #pragma mark Optional settings
 
