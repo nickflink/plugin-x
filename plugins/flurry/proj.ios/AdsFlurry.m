@@ -63,12 +63,7 @@ THE SOFTWARE.
 
     UIViewController* controller = [AdsWrapper getCurrentRootViewController];
     if (controller) {
-        //Note: you must call this more than once if the ad is not ready for space
-        if ([FlurryAds adReadyForSpace:strSpaceID]) {
-            [FlurryAds displayAdForSpace:strSpaceID onView:controller.view viewControllerForPresentation:controller];
-        } else {
-            [FlurryAds fetchAdForSpace:strSpaceID frame:controller.view.frame size:size];
-        }
+        [FlurryAds fetchAndDisplayAdForSpace:strSpaceID view:controller.view viewController:controller size:size];
     }
 }
 
