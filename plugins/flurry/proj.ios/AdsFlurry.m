@@ -113,7 +113,7 @@ THE SOFTWARE.
 
 - (void) spaceDidReceiveAd:(NSString*)adSpace
 {
-    [AdsWrapper onAdsResult:self withRet:kAdsReceived  withMsg:@"Ads of flurry received"];
+    [AdsWrapper onAdsResult:self withRet:kAdsReceived  withMsg:adSpace];
 }
 
 - (void) spaceDidFailToReceiveAd:(NSString*)adSpace error:(NSError *)error
@@ -122,18 +122,67 @@ THE SOFTWARE.
     if (! strMsg) {
         strMsg = @"Failed to receive ads";
     }
-    [AdsWrapper onAdsResult:self withRet:kUnknownError withMsg:strMsg];
+    OUTPUT_LOG(@"spaceDidFailToReceiveAd:%@", strMsg);
+    [AdsWrapper onAdsResult:self withRet:kUnknownError withMsg:adSpace];
 }
 
 - (BOOL) spaceShouldDisplay:(NSString*)adSpace interstitial:(BOOL)interstitial
 {
-    [AdsWrapper onAdsResult:self withRet:kAdsShown withMsg:@"Ads will be shown"];
+    [AdsWrapper onAdsResult:self withRet:kAdsShown withMsg:adSpace];
     return YES;
 }
 
-- (void) spaceWillDismiss:(NSString *)adSpace
+- (void) spaceDidRender:(NSString *)space interstitial:(BOOL)interstitial {
+    OUTPUT_LOG(@"spaceDidRender:%@ interstital:%s", space, interstitial ? "true" : "false");
+}
+
+- (void) spaceDidFailToRender:(NSString *)space error:(NSError *)error {
+    NSString* strMsg = [[error userInfo] objectForKey:@"NSLocalizedDescription"];
+    if (! strMsg) {
+        strMsg = @"Failed to receive ads";
+    }
+    OUTPUT_LOG(@"spaceDidFailToRender:%@", strMsg);
+    [AdsWrapper onAdsResult:self withRet:kUnknownError withMsg:space];
+}
+
+- (void) spaceWillDismiss:(NSString *)adSpace interstitial:(BOOL)interstitial
 {
-    [AdsWrapper onAdsResult:self withRet:kAdsDismissed withMsg:@"Ads will be dismissed"];
+    OUTPUT_LOG(@"spaceWillDismiss:%@ interstital:%s", adSpace, interstitial ? "true" : "false");
+}
+
+- (void)spaceDidDismiss:(NSString *)adSpace interstitial:(BOOL)interstitial
+{
+    [AdsWrapper onAdsResult:self withRet:kAdsDismissed withMsg:adSpace];
+}
+
+- (void) spaceWillLeaveApplication:(NSString *)adSpace
+{
+    OUTPUT_LOG(@"spaceWillLeaveApplication:%@", adSpace);
+}
+
+- (void) spaceWillExpand:(NSString *)adSpace
+{
+    OUTPUT_LOG(@"spaceWillExpand:%@", adSpace);
+}
+
+- (void) spaceWillCollapse:(NSString *)adSpace
+{
+    OUTPUT_LOG(@"spaceWillCollapse:%@", adSpace);
+}
+
+- (void) spaceDidCollapse:(NSString *)adSpace
+{
+    OUTPUT_LOG(@"spaceDidCollapse:%@", adSpace);
+}
+
+- (void) spaceDidReceiveClick:(NSString*)adSpace
+{
+    OUTPUT_LOG(@"spaceDidReceiveClick:%@", adSpace);
+}
+
+- (void)videoDidFinish:(NSString *)adSpace
+{
+    [AdsWrapper onAdsResult:self withRet:kPointsSpendSucceed withMsg:adSpace];
 }
 
 @end

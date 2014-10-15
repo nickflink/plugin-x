@@ -46,8 +46,19 @@ THE SOFTWARE.
 /**
  interfaces of protocol : FlurryAdDelegate
  */
+
 - (void) spaceDidReceiveAd:(NSString*)adSpace;
 - (void) spaceDidFailToReceiveAd:(NSString*)adSpace error:(NSError *)error;
 - (BOOL) spaceShouldDisplay:(NSString*)adSpace interstitial:(BOOL)interstitial;
+- (void) spaceDidRender:(NSString *)space interstitial:(BOOL)interstitial;
+- (void) spaceDidFailToRender:(NSString *)space error:(NSError *)error;
+- (void) spaceWillDismiss:(NSString *)adSpace interstitial:(BOOL)interstitial;
+- (void) spaceDidDismiss:(NSString *)adSpace interstitial:(BOOL)interstitial;
+- (void) spaceWillLeaveApplication:(NSString *)adSpace;
+- (void) spaceWillExpand:(NSString *)adSpace;
+- (void) spaceWillCollapse:(NSString *)adSpace;
+- (void) spaceDidCollapse:(NSString *)adSpace;
+- (void) spaceDidReceiveClick:(NSString*)adSpace;
+- (void)videoDidFinish:(NSString *)adSpace;
 
 @end
