@@ -45,5 +45,4 @@ typedef enum {
 }
 
 + (void) onSocialResult:(id) obj withRet:(SocialResult) ret withMsg:(NSString*) msg;
-
 @end

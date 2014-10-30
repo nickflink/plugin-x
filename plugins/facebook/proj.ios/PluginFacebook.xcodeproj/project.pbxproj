@@ -7,18 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		014AD63317B82504007E0C2E /* ShareFacebook.m in Sources */ = {isa = PBXBuildFile; fileRef = 014AD63217B82504007E0C2E /* ShareFacebook.m */; };
-		014AD63417B8251A007E0C2E /* ShareFacebook.h in Sources */ = {isa = PBXBuildFile; fileRef = 014AD63117B82504007E0C2E /* ShareFacebook.h */; };
-		01D665BC182D06870063F1E7 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01D665BB182D06870063F1E7 /* FacebookSDK.framework */; };
-		FACAD88C1762C1B500D75ADE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FACAD88B1762C1B500D75ADE /* Foundation.framework */; };
-		FACAD8C41762C64100D75ADE /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FACAD8C31762C64100D75ADE /* UIKit.framework */; };
+		BA34A761195AA8C7002D0ECD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA34A760195AA8C7002D0ECD /* Foundation.framework */; };
+		BA34A799195AA8ED002D0ECD /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA34A798195AA8ED002D0ECD /* FacebookSDK.framework */; };
+		BA34A79E195AA939002D0ECD /* ShareFacebook.m in Sources */ = {isa = PBXBuildFile; fileRef = BA34A79B195AA939002D0ECD /* ShareFacebook.m */; };
+		BA34A79F195AA939002D0ECD /* UserFacebook.m in Sources */ = {isa = PBXBuildFile; fileRef = BA34A79D195AA939002D0ECD /* UserFacebook.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		FACAD8861762C1B500D75ADE /* CopyFiles */ = {
+		BA34A75B195AA8C7002D0ECD /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
-			dstPath = "include/${PRODUCT_NAME}";
+			dstPath = "include/$(PRODUCT_NAME)";
 			dstSubfolderSpec = 16;
 			files = (
 			);
@@ -27,68 +26,85 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		0137615217876EED00D7FCC9 /* PluginFacebook-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PluginFacebook-Prefix.pch"; sourceTree = "<group>"; };
-		014AD63117B82504007E0C2E /* ShareFacebook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareFacebook.h; sourceTree = "<group>"; };
-		014AD63217B82504007E0C2E /* ShareFacebook.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareFacebook.m; sourceTree = "<group>"; };
-		01D665BB182D06870063F1E7 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = "../../../facebook-ios-sdk/build/FacebookSDK.framework"; sourceTree = "<group>"; };
-		FACAD8881762C1B500D75ADE /* libPluginFacebook.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPluginFacebook.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		FACAD88B1762C1B500D75ADE /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		FACAD8C31762C64100D75ADE /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		BA34A75D195AA8C7002D0ECD /* libPluginFacebook.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPluginFacebook.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		BA34A760195AA8C7002D0ECD /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		BA34A764195AA8C7002D0ECD /* PluginFacebook-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PluginFacebook-Prefix.pch"; sourceTree = "<group>"; };
+		BA34A798195AA8ED002D0ECD /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = sdk/FacebookSDK.framework; sourceTree = "<group>"; };
+		BA34A79A195AA939002D0ECD /* ShareFacebook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareFacebook.h; sourceTree = "<group>"; };
+		BA34A79B195AA939002D0ECD /* ShareFacebook.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareFacebook.m; sourceTree = "<group>"; };
+		BA34A79C195AA939002D0ECD /* UserFacebook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserFacebook.h; sourceTree = "<group>"; };
+		BA34A79D195AA939002D0ECD /* UserFacebook.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserFacebook.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		FACAD8851762C1B500D75ADE /* Frameworks */ = {
+		BA34A75A195AA8C7002D0ECD /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FACAD8C41762C64100D75ADE /* UIKit.framework in Frameworks */,
-				FACAD88C1762C1B500D75ADE /* Foundation.framework in Frameworks */,
-				01D665BC182D06870063F1E7 /* FacebookSDK.framework in Frameworks */,
+				BA34A761195AA8C7002D0ECD /* Foundation.framework in Frameworks */,
+				BA34A799195AA8ED002D0ECD /* FacebookSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		FACAD87D1762C1B500D75ADE = {
+		BA34A754195AA8C7002D0ECD = {
 			isa = PBXGroup;
 			children = (
-				014AD63117B82504007E0C2E /* ShareFacebook.h */,
-				014AD63217B82504007E0C2E /* ShareFacebook.m */,
-				0137615217876EED00D7FCC9 /* PluginFacebook-Prefix.pch */,
-				FACAD88A1762C1B500D75ADE /* Frameworks */,
-				FACAD8891762C1B500D75ADE /* Products */,
+				BA34A762195AA8C7002D0ECD /* PluginFacebook */,
+				BA34A75F195AA8C7002D0ECD /* Frameworks */,
+				BA34A75E195AA8C7002D0ECD /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		FACAD8891762C1B500D75ADE /* Products */ = {
+		BA34A75E195AA8C7002D0ECD /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				FACAD8881762C1B500D75ADE /* libPluginFacebook.a */,
+				BA34A75D195AA8C7002D0ECD /* libPluginFacebook.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		FACAD88A1762C1B500D75ADE /* Frameworks */ = {
+		BA34A75F195AA8C7002D0ECD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				01D665BB182D06870063F1E7 /* FacebookSDK.framework */,
-				FACAD8C31762C64100D75ADE /* UIKit.framework */,
-				FACAD88B1762C1B500D75ADE /* Foundation.framework */,
+				BA34A798195AA8ED002D0ECD /* FacebookSDK.framework */,
+				BA34A760195AA8C7002D0ECD /* Foundation.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		BA34A762195AA8C7002D0ECD /* PluginFacebook */ = {
+			isa = PBXGroup;
+			children = (
+				BA34A79A195AA939002D0ECD /* ShareFacebook.h */,
+				BA34A79B195AA939002D0ECD /* ShareFacebook.m */,
+				BA34A79C195AA939002D0ECD /* UserFacebook.h */,
+				BA34A79D195AA939002D0ECD /* UserFacebook.m */,
+				BA34A763195AA8C7002D0ECD /* Supporting Files */,
+			);
+			path = PluginFacebook;
+			sourceTree = "<group>";
+		};
+		BA34A763195AA8C7002D0ECD /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				BA34A764195AA8C7002D0ECD /* PluginFacebook-Prefix.pch */,
+			);
+			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		FACAD8871762C1B500D75ADE /* PluginFacebook */ = {
+		BA34A75C195AA8C7002D0ECD /* PluginFacebook */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = FACAD8961762C1B500D75ADE /* Build configuration list for PBXNativeTarget "PluginFacebook" */;
+			buildConfigurationList = BA34A780195AA8C7002D0ECD /* Build configuration list for PBXNativeTarget "PluginFacebook" */;
 			buildPhases = (
-				FACAD8841762C1B500D75ADE /* Sources */,
-				FACAD8851762C1B500D75ADE /* Frameworks */,
-				FACAD8861762C1B500D75ADE /* CopyFiles */,
+				BA34A759195AA8C7002D0ECD /* Sources */,
+				BA34A75A195AA8C7002D0ECD /* Frameworks */,
+				BA34A75B195AA8C7002D0ECD /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -96,57 +112,63 @@
 			);
 			name = PluginFacebook;
 			productName = PluginFacebook;
-			productReference = FACAD8881762C1B500D75ADE /* libPluginFacebook.a */;
+			productReference = BA34A75D195AA8C7002D0ECD /* libPluginFacebook.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		FACAD87F1762C1B500D75ADE /* Project object */ = {
+		BA34A755195AA8C7002D0ECD /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0460;
-				ORGANIZATIONNAME = zhangbin;
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = "Cocos2d-x";
 			};
-			buildConfigurationList = FACAD8821762C1B500D75ADE /* Build configuration list for PBXProject "PluginFacebook" */;
+			buildConfigurationList = BA34A758195AA8C7002D0ECD /* Build configuration list for PBXProject "PluginFacebook" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 			);
-			mainGroup = FACAD87D1762C1B500D75ADE;
-			productRefGroup = FACAD8891762C1B500D75ADE /* Products */;
+			mainGroup = BA34A754195AA8C7002D0ECD;
+			productRefGroup = BA34A75E195AA8C7002D0ECD /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				FACAD8871762C1B500D75ADE /* PluginFacebook */,
+				BA34A75C195AA8C7002D0ECD /* PluginFacebook */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
-		FACAD8841762C1B500D75ADE /* Sources */ = {
+		BA34A759195AA8C7002D0ECD /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				014AD63417B8251A007E0C2E /* ShareFacebook.h in Sources */,
-				014AD63317B82504007E0C2E /* ShareFacebook.m in Sources */,
+				BA34A79F195AA939002D0ECD /* UserFacebook.m in Sources */,
+				BA34A79E195AA939002D0ECD /* ShareFacebook.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
-		FACAD8941762C1B500D75ADE /* Debug */ = {
+		BA34A77E195AA8C7002D0ECD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -157,105 +179,107 @@
 					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
 		};
-		FACAD8951762C1B500D75ADE /* Release */ = {
+		BA34A77F195AA8C7002D0ECD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
-		FACAD8971762C1B500D75ADE /* Debug */ = {
+		BA34A781195AA8C7002D0ECD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_CXX_LIBRARY = "libc++";
 				DSTROOT = /tmp/PluginFacebook.dst;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/../../../../facebook-ios-sdk/build\"",
-					"\"$(SRCROOT)/../../../facebook-ios-sdk/build\"",
+					"$(PROJECT_DIR)/sdk",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "PluginFacebook-Prefix.pch";
+				GCC_PREFIX_HEADER = "PluginFacebook/PluginFacebook-Prefix.pch";
 				HEADER_SEARCH_PATHS = "$(SRCROOT)/../../../protocols/platform/ios";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/../../../protocols/proj.ios/build/Release-iphoneos\"",
-				);
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = PluginFacebook;
+				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				VALID_ARCHS = "arm64 armv7";
 			};
 			name = Debug;
 		};
-		FACAD8981762C1B500D75ADE /* Release */ = {
+		BA34A782195AA8C7002D0ECD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_CXX_LIBRARY = "libc++";
 				DSTROOT = /tmp/PluginFacebook.dst;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/../../../../facebook-ios-sdk/build\"",
-					"\"$(SRCROOT)/../../../facebook-ios-sdk/build\"",
+					"$(PROJECT_DIR)/sdk",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "PluginFacebook-Prefix.pch";
+				GCC_PREFIX_HEADER = "PluginFacebook/PluginFacebook-Prefix.pch";
 				HEADER_SEARCH_PATHS = "$(SRCROOT)/../../../protocols/platform/ios";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/../../../protocols/proj.ios/build/Release-iphoneos\"",
-				);
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = PluginFacebook;
+				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				VALID_ARCHS = "arm64 armv7";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		FACAD8821762C1B500D75ADE /* Build configuration list for PBXProject "PluginFacebook" */ = {
+		BA34A758195AA8C7002D0ECD /* Build configuration list for PBXProject "PluginFacebook" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				FACAD8941762C1B500D75ADE /* Debug */,
-				FACAD8951762C1B500D75ADE /* Release */,
+				BA34A77E195AA8C7002D0ECD /* Debug */,
+				BA34A77F195AA8C7002D0ECD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		FACAD8961762C1B500D75ADE /* Build configuration list for PBXNativeTarget "PluginFacebook" */ = {
+		BA34A780195AA8C7002D0ECD /* Build configuration list for PBXNativeTarget "PluginFacebook" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				FACAD8971762C1B500D75ADE /* Debug */,
-				FACAD8981762C1B500D75ADE /* Release */,
+				BA34A781195AA8C7002D0ECD /* Debug */,
+				BA34A782195AA8C7002D0ECD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = FACAD87F1762C1B500D75ADE /* Project object */;
+	rootObject = BA34A755195AA8C7002D0ECD /* Project object */;
 }
