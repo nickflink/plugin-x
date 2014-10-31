@@ -37,6 +37,7 @@ NSArray * _transactionArray;
 
 -(void) configDeveloperInfo: (NSMutableDictionary*) cpInfo{
 }
+
 - (void) payForProduct: (NSMutableDictionary*) cpInfo{
     NSString * pid = [cpInfo objectForKey:@"productId"];
     SKProduct *skProduct = [self getProductById:pid];
@@ -46,9 +47,11 @@ NSArray * _transactionArray;
         OUTPUT_LOG(@"add PaymentQueue");
     }
 }
+
 - (void) setDebugMode: (BOOL) _debug{
     self.debug = _debug;
 }
+
 - (NSString*) getSDKVersion{
     return @"1.0";
 }
@@ -61,6 +64,7 @@ NSArray * _transactionArray;
 -(void)setServerMode{
     _isServerMode = true;
 }
+
 -(void)requestProducts:(NSString*) paramMap{
     [self setDebug:true];
     if(!_isAddObserver){
@@ -73,11 +77,12 @@ NSArray * _transactionArray;
     _productsRequest = [[SKProductsRequest alloc] initWithProductIdentifiers:_productIdentifiers];
     _productsRequest.delegate = self;
     [_productsRequest start];
-
 }
+
 -(NSString *)parseProductToString:(NSArray *) products{
     return @"1";
 }
+
 -(SKProduct *)getProductById:(NSString *)productid{
     for (SKProduct * skProduct in _productArray) {
         if([skProduct.productIdentifier isEqualToString:productid]){
@@ -179,6 +184,7 @@ NSArray * _transactionArray;
         [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
     }
 }
+
 -(SKPaymentTransaction *) getTranscationByProductId:(NSString *)productId{
     for(SKPaymentTransaction *tran in _transactionArray){
         if([tran.payment.productIdentifier isEqualToString:productId]){
@@ -187,6 +193,7 @@ NSArray * _transactionArray;
     }
     return NULL;
 }
+
 - (NSString *)encode:(const uint8_t *)input length:(NSInteger)length {
     static char table[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
     

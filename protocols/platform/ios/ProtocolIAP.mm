@@ -164,6 +164,7 @@ void ProtocolIAP::setResultListener(PayResultListener* pListener)
 {
     _listener = pListener;
 }
+
 void ProtocolIAP::onPayResult(PayResultCode ret, const char* msg)
 {
     _paying = false;
