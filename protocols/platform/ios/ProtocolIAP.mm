@@ -60,6 +60,37 @@ void ProtocolIAP::configDeveloperInfo(TIAPDeveloperInfo devInfo)
     }
 }
 
+void ProtocolIAP::requestProducts(TProductInfo info) {
+    if (info.empty())
+    {
+        if (NULL != _listener)
+        {
+            TProductList emptyList;
+            onRequestProductsResult(kRequestFail, emptyList);
+
+        }
+        PluginUtilsIOS::outputLog("The product info is empty for %s!", this->getPluginName());
+        return;
+    }
+    else
+    {
+        _curInfo = info;
+        
+        PluginOCData* pData = PluginUtilsIOS::getPluginOCData(this);
+        assert(pData != NULL);
+        
+        id ocObj = pData->obj;
+        if ([ocObj conformsToProtocol:@protocol(InterfaceIAP)]) {
+            NSObject<InterfaceIAP>* curObj = ocObj;
+            NSMutableDictionary* dict = PluginUtilsIOS::createDictFromMap(&info);
+            NSString * pids = [dict objectForKey:@"productId"];
+            [curObj requestProducts:pids];
+
+        }
+    }
+}
+
+
 void ProtocolIAP::payForProduct(TProductInfo info)
 {
     if (_paying)
@@ -148,5 +179,22 @@ void ProtocolIAP::onPayResult(PayResultCode ret, const char* msg)
     _curInfo.clear();
     PluginUtilsIOS::outputLog("Pay result of %s is : %d(%s)", this->getPluginName(), (int) ret, msg);
 }
+
+void ProtocolIAP::onRequestProductsResult(IAPProductRequest ret, TProductList info)
+{
+    if (_listener)
+    {
+        _listener->onRequestProductsResult(ret, info);
+    }
+    else
+    {
+        PluginUtilsIOS::outputLog("Pay result listener of %s is null!", this->getPluginName());
+    }
+
+    _curInfo.clear();
+    PluginUtilsIOS::outputLog("Pay result of %s is : %d(TProductList)", this->getPluginName(), (int) ret);
+}
+
+
 
 }} //namespace cocos2d { namespace plugin {

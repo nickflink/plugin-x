@@ -27,7 +27,8 @@ THE SOFTWARE.
 @protocol InterfaceIAP <NSObject>
 
 - (void) configDeveloperInfo: (NSMutableDictionary*) cpInfo;
-- (void) payForProduct: (NSMutableDictionary*) profuctInfo;
+- (void) requestProducts: (NSString*) paramMap;
+- (void) payForProduct: (NSMutableDictionary*) productInfo;
 - (void) setDebugMode: (BOOL) debug;
 - (NSString*) getSDKVersion;
 - (NSString*) getPluginVersion;

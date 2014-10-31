@@ -43,9 +43,9 @@ typedef enum
 } PayResultCode;
     
 typedef enum {
-    RequestSuccees=0,
-    RequestFail,
-    RequestTimeout,
+    kRequestSuccees=0,
+    kRequestFail,
+    kRequestTimeout,
 } IAPProductRequest;
 
 class PayResultListener
@@ -71,6 +71,17 @@ public:
              And invoked only once.
     */
     void configDeveloperInfo(TIAPDeveloperInfo devInfo);
+
+    /**
+    @brief request products
+    @param info The info of product, must contains key:
+            productName         The name of product
+            productPrice        The price of product(must can be parse to float)
+            productDesc         The description of product
+    @warning For different plugin, the parameter should have other keys to pay.
+             Look at the manual of plugins.
+    */
+    void requestProducts(TProductInfo info);
 
     /**
     @brief pay for product
@@ -105,6 +116,12 @@ public:
     @brief pay result callback
     */
     void onPayResult(PayResultCode ret, const char* msg);
+  
+    /**
+    @brief request product result callback
+    */
+    void onRequestProductsResult(IAPProductRequest ret, TProductList info);
+
 
     /**
     @brief set callback function
