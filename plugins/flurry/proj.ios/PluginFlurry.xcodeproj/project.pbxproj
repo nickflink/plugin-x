@@ -27,6 +27,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		017387FF19ED6457004CE63A /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		FA09A372168AFD41008C1C7B /* libPluginFlurry.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPluginFlurry.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA09A375168AFD41008C1C7B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		FA73FC8E17A11B84007E23C2 /* AdsFlurry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdsFlurry.h; sourceTree = "<group>"; };
@@ -83,6 +84,7 @@
 		FA09A374168AFD41008C1C7B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				017387FF19ED6457004CE63A /* Security.framework */,
 				FA86650E168BE22D0073E055 /* SystemConfiguration.framework */,
 				FA09A375168AFD41008C1C7B /* Foundation.framework */,
 			);
@@ -125,7 +127,7 @@
 		FA09A369168AFD41008C1C7B /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0510;
+				LastUpgradeCheck = 0600;
 				ORGANIZATIONNAME = zhangbin;
 			};
 			buildConfigurationList = FA09A36C168AFD41008C1C7B /* Build configuration list for PBXProject "PluginFlurry" */;
@@ -169,8 +171,10 @@
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -203,8 +207,10 @@
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -229,18 +235,15 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PluginFlurry-Prefix.pch";
 				HEADER_SEARCH_PATHS = "$(SRCROOT)/../../../protocols/platform/ios";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../platform/ios\"",
 					"\"$(SRCROOT)\"",
 					"\"$(SRCROOT)/FlurryAds\"",
 				);
-				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = PluginFlurry;
 				SKIP_INSTALL = YES;
-				VALID_ARCHS = "arm64 armv7";
 			};
 			name = Debug;
 		};
@@ -254,7 +257,6 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PluginFlurry-Prefix.pch";
 				HEADER_SEARCH_PATHS = "$(SRCROOT)/../../../protocols/platform/ios";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../platform/ios\"",
@@ -264,7 +266,6 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = PluginFlurry;
 				SKIP_INSTALL = YES;
-				VALID_ARCHS = "arm64 armv7";
 			};
 			name = Release;
 		};
