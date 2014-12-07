@@ -30,6 +30,7 @@ THE SOFTWARE.
 }
 
 @property BOOL debug;
+@property (assign, nonatomic) NSMutableArray* spacesToDisplay;
 
 /**
  interfaces of protocol : InterfaceAds

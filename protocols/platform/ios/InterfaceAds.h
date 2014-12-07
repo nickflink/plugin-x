@@ -27,6 +27,7 @@ THE SOFTWARE.
 @protocol InterfaceAds <NSObject>
 
 - (void) configDeveloperInfo: (NSMutableDictionary*) devInfo;
+- (void) fetchAds: (NSMutableDictionary*) info position:(int) pos;
 - (void) showAds: (NSMutableDictionary*) info position:(int) pos;
 - (void) hideAds: (NSMutableDictionary*) info;
 - (void) queryPoints;

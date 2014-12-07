@@ -93,6 +93,15 @@ public:
     void configDeveloperInfo(TAdsDeveloperInfo devInfo);
 
     /**
+     @brief fetch adview
+     @param info The information of adview will be shown
+     Pay attention to the subclass definition
+     @param pos The position where the adview be shown.
+     */
+    void fetchAds(TAdsInfo info, AdsPos pos = kPosCenter);
+
+    
+    /**
     @brief show adview
     @param info The information of adview will be shown
                 Pay attention to the subclass definition

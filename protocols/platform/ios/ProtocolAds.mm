@@ -57,6 +57,20 @@ void ProtocolAds::configDeveloperInfo(TAdsDeveloperInfo devInfo)
         }
     }
 }
+    
+    void ProtocolAds::fetchAds(TAdsInfo info, AdsPos pos)
+
+{
+    PluginOCData* pData = PluginUtilsIOS::getPluginOCData(this);
+    assert(pData != NULL);
+    
+    id ocObj = pData->obj;
+    if ([ocObj conformsToProtocol:@protocol(InterfaceAds)]) {
+        NSObject<InterfaceAds>* curObj = ocObj;
+        NSMutableDictionary* dict = PluginUtilsIOS::createDictFromMap(&info);
+        [curObj fetchAds:dict position:pos];
+    }
+}
 
 void ProtocolAds::showAds(TAdsInfo info, AdsPos pos)
 {

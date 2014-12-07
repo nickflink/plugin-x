@@ -31,7 +31,16 @@ THE SOFTWARE.
 @implementation AdsFlurry
 
 @synthesize debug = __debug;
+@synthesize spacesToDisplay = __SpacesToDisplay;
 
+- (void) dealloc
+{
+    if (self.spacesToDisplay != nil) {
+        [self.spacesToDisplay release];
+        self.spacesToDisplay = nil;
+    }
+    [super dealloc];
+}
 
 #pragma mark Interfaces for ProtocolAds impl
 
@@ -41,9 +50,38 @@ THE SOFTWARE.
     if (appKey) {
         [Flurry startSession:appKey];
     }
-
     [FlurryAds initialize:[AdsWrapper getCurrentRootViewController]];
     [FlurryAds setAdDelegate:self];
+}
+
+- (void) fetchAds: (NSMutableDictionary*) info position:(int) pos
+{
+    NSString* strSpaceID = [info objectForKey:@"FlurryAdsID"];
+    if (! strSpaceID || [strSpaceID length] == 0) {
+        OUTPUT_LOG(@"Value of 'FlurryAdsID' should not be empty");
+        return;
+    }
+    
+    NSString* strSize = [info objectForKey:@"FlurryAdsSize"];
+    int size = [strSize intValue];
+    if (size != 1 && size != 2 && size != 3) {
+        OUTPUT_LOG(@"Value of 'FlurryAdsSize' should be one of '1', '2', '3' ");
+        return;
+    }
+    
+    UIViewController* controller = [AdsWrapper getCurrentRootViewController];
+    if (controller) {
+        UIView* mainView = controller.view;
+        if(mainView) {
+            //CGRect frame = mainView.bounds;
+            CGRect frame = [mainView frame];
+            //[FlurryAds fetchAndDisplayAdForSpace:strSpaceID view:controller.view viewController:controller size:size];
+            [FlurryAds fetchAdForSpace:strSpaceID frame:frame size:size];
+        }
+
+    }
+    
+    
 }
 
 - (void) showAds: (NSMutableDictionary*) info position:(int) pos
@@ -61,6 +99,11 @@ THE SOFTWARE.
         return;
     }
 
+    if (nil == self.spacesToDisplay) {
+        self.spacesToDisplay = [[NSMutableArray alloc] init];
+    }
+    [self.spacesToDisplay addObject:strSpaceID];
+
     UIViewController* controller = [AdsWrapper getCurrentRootViewController];
     if (controller) {
         [FlurryAds fetchAndDisplayAdForSpace:strSpaceID view:controller.view viewController:controller size:size];
@@ -73,6 +116,10 @@ THE SOFTWARE.
     if (! strSpaceID || [strSpaceID length] == 0) {
         OUTPUT_LOG(@"Value of 'FlurryAdsID' should not be empty");
         return;
+    }
+
+    if (nil != self.spacesToDisplay) {
+        [self.spacesToDisplay removeObject:strSpaceID];
     }
 
     [FlurryAds removeAdFromSpace:strSpaceID];
@@ -128,8 +175,12 @@ THE SOFTWARE.
 
 - (BOOL) spaceShouldDisplay:(NSString*)adSpace interstitial:(BOOL)interstitial
 {
-    [AdsWrapper onAdsResult:self withRet:kAdsShown withMsg:adSpace];
-    return YES;
+    BOOL shouldDisplay = NO;
+    if([self.spacesToDisplay containsObject:adSpace]) {
+        [AdsWrapper onAdsResult:self withRet:kAdsShown withMsg:adSpace];
+        shouldDisplay = YES;
+    }
+    return shouldDisplay;
 }
 
 - (void) spaceDidRender:(NSString *)space interstitial:(BOOL)interstitial {
