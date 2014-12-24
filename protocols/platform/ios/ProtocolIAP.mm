@@ -60,6 +60,18 @@ void ProtocolIAP::configDeveloperInfo(TIAPDeveloperInfo devInfo)
     }
 }
 
+void ProtocolIAP::restoreCompletedPurchases() {
+    PluginOCData* pData = PluginUtilsIOS::getPluginOCData(this);
+    assert(pData != NULL);
+    
+    id ocObj = pData->obj;
+    if ([ocObj conformsToProtocol:@protocol(InterfaceIAP)]) {
+        NSObject<InterfaceIAP>* curObj = ocObj;
+        [curObj restoreCompletedPurchases];
+
+    }
+}
+
 void ProtocolIAP::requestProducts(TProductInfo info) {
     if (info.empty())
     {

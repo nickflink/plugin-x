@@ -28,6 +28,7 @@ THE SOFTWARE.
 
 - (void) configDeveloperInfo: (NSMutableDictionary*) cpInfo;
 - (void) requestProducts: (NSString*) paramMap;
+- (void) restoreCompletedPurchases;
 - (void) payForProduct: (NSMutableDictionary*) productInfo;
 - (void) setDebugMode: (BOOL) debug;
 - (NSString*) getSDKVersion;

@@ -31,6 +31,7 @@
  interface of InterfaceIAP
  **/
 - (void) configDeveloperInfo: (NSMutableDictionary*) cpInfo;
+- (void) restoreCompletedPurchases;
 - (void) payForProduct: (NSMutableDictionary*) profuctInfo;
 - (void) setDebugMode: (BOOL) debug;
 - (NSString*) getSDKVersion;

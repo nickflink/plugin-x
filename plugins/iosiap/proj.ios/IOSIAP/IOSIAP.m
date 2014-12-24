@@ -38,6 +38,10 @@ NSArray * _transactionArray;
 -(void) configDeveloperInfo: (NSMutableDictionary*) cpInfo{
 }
 
+- (void) restoreCompletedPurchases {
+    [self restoreCompletedTransactions];
+}
+
 - (void) payForProduct: (NSMutableDictionary*) cpInfo{
     NSString * pid = [cpInfo objectForKey:@"productId"];
     SKProduct *skProduct = [self getProductById:pid];

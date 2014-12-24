@@ -38,6 +38,15 @@
     NSLog(@"IAPAppStore::configDeveloperInfo");
 }
 
+- (void) requestProducts: (NSString*) paramMap
+{
+    NSLog(@"IAPAppStore::requestProducts");
+}
+
+- (void) restoreCompletedPurchases {
+    NSLog(@"IAPAppStore::restoreCompletedPurchases");
+}
+
 - (void) payForProduct: (NSMutableDictionary*) IAPInfo
 {
     NSLog(@"IAPAppStore::payForProduct");

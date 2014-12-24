@@ -73,6 +73,12 @@ public:
     void configDeveloperInfo(TIAPDeveloperInfo devInfo);
 
     /**
+    @brief restore completed purchases
+           this will trigger the login flow and 
+           reward any subscription based purchases to a new device
+    */
+    void restoreCompletedPurchases();
+    /**
     @brief request products
     @param info The info of product, must contains key:
             productName         The name of product
