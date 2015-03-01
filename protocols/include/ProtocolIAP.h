@@ -38,21 +38,30 @@ typedef enum
 {
     kPaySuccess = 0,
     kPayFail,
-    kPayCancel,
+    kPayRestore,
     kPayTimeOut,
 } PayResultCode;
-    
+
 typedef enum {
     kRequestSuccees=0,
     kRequestFail,
     kRequestTimeout,
 } IAPProductRequest;
 
+typedef enum {
+    kRestoreSuccess = 0,
+    kRestoreFail,
+    kRestoreCancel,
+    kRestoreTimeOut,
+} IAPProductRestore;
+
 class PayResultListener
 {
 public:
     virtual void onPayResult(PayResultCode ret, const char* msg, TProductInfo info) = 0;
     virtual void onRequestProductsResult(IAPProductRequest ret, TProductList info){}
+    virtual void onRestoreProductsResult(IAPProductRestore ret, TProductList info){}
+
 };
 
 class ProtocolIAP : public PluginProtocol
@@ -128,6 +137,10 @@ public:
     */
     void onRequestProductsResult(IAPProductRequest ret, TProductList info);
 
+    /**
+     @brief restore product result callback
+     */
+    void onRestoreProductsResult(IAPProductRestore ret, TProductList info);
 
     /**
     @brief set callback function

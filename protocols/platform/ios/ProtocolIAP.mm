@@ -68,7 +68,6 @@ void ProtocolIAP::restoreCompletedPurchases() {
     if ([ocObj conformsToProtocol:@protocol(InterfaceIAP)]) {
         NSObject<InterfaceIAP>* curObj = ocObj;
         [curObj restoreCompletedPurchases];
-
     }
 }
 
@@ -204,6 +203,21 @@ void ProtocolIAP::onRequestProductsResult(IAPProductRequest ret, TProductList in
         PluginUtilsIOS::outputLog("Pay result listener of %s is null!", this->getPluginName());
     }
 
+    _curInfo.clear();
+    PluginUtilsIOS::outputLog("Pay result of %s is : %d(TProductList)", this->getPluginName(), (int) ret);
+}
+    
+void ProtocolIAP::onRestoreProductsResult(IAPProductRestore ret, TProductList info)
+{
+    if (_listener)
+    {
+        _listener->onRestoreProductsResult(ret, info);
+    }
+    else
+    {
+        PluginUtilsIOS::outputLog("Pay result listener of %s is null!", this->getPluginName());
+    }
+    
     _curInfo.clear();
     PluginUtilsIOS::outputLog("Pay result of %s is : %d(TProductList)", this->getPluginName(), (int) ret);
 }

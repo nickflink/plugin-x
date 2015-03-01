@@ -38,6 +38,12 @@ using namespace cocos2d::plugin;
     ProtocolIAP* iapPlugin = dynamic_cast<ProtocolIAP*>(plugin);
     ProtocolIAP::ProtocolIAPCallback callback = iapPlugin->getCallback();
     const char* chMsg = [msg UTF8String];
+    //This is mapping...
+    //PaymentTransactionStatePurchased => kPaySuccess
+    //PaymentTransactionStateFailed => kPayFail
+    //PaymentTransactionStateRestored => kPayRestore
+    //PaymentTransactionStateTimeout => kPayTimeOut
+
     PayResultCode cRet = (PayResultCode) ret;
     if (iapPlugin) {
         iapPlugin->onPayResult(cRet, chMsg);
@@ -49,7 +55,7 @@ using namespace cocos2d::plugin;
     }
 }
 
-+(void) onRequestProduct:(id)obj withRet:(ProductRequest) ret withProducts:(NSArray *)products{
++(void) onRequestProduct:(id)obj withRet:(ProductRequest) ret withProducts:(NSArray *)products {
     PluginProtocol* plugin = PluginUtilsIOS::getPluginPtr(obj);
     ProtocolIAP* iapPlugin = dynamic_cast<ProtocolIAP*>(plugin);
     PayResultListener *listener = iapPlugin->getResultListener();
@@ -84,6 +90,46 @@ using namespace cocos2d::plugin;
             }
             std::string stdstr(charProductInfo);
             callback((IAPProductRequest )ret,stdstr);
+        }
+    } else {
+        PluginUtilsIOS::outputLog("Can't find the C++ object of the IAP plugin");
+    }
+}
+
++(void) onRestoreProduct:(id)obj withRet:(ProductRestore) ret withProducts:(NSArray *)products {
+    PluginProtocol* plugin = PluginUtilsIOS::getPluginPtr(obj);
+    ProtocolIAP* iapPlugin = dynamic_cast<ProtocolIAP*>(plugin);
+    PayResultListener *listener = iapPlugin->getResultListener();
+    ProtocolIAP::ProtocolIAPCallback callback = iapPlugin->getCallback();
+    if (iapPlugin) {
+        if(listener){
+            TProductList pdlist;
+            if (products) {
+                NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
+                [formatter setFormatterBehavior:NSNumberFormatterBehavior10_4];
+                [formatter setNumberStyle:NSNumberFormatterCurrencyStyle];
+                for(SKProduct *product in products){
+                    TProductInfo info;
+                    [formatter setLocale:[product priceLocale]];
+                    info.insert(std::make_pair("productId", std::string([product.productIdentifier UTF8String])));
+                    info.insert(std::make_pair("productName", std::string([product.localizedTitle UTF8String])));
+                    info.insert(std::make_pair("productPrice", std::string([[formatter stringFromNumber:[product price]] UTF8String])));
+                    info.insert(std::make_pair("productDesc", std::string([product.localizedDescription UTF8String])));
+                    pdlist.push_back(info);
+                }
+                [formatter release];
+            }
+            listener->onRestoreProductsResult((IAPProductRestore )ret,pdlist);
+        }else if(callback){
+            NSString *productInfo =  [ParseUtils NSDictionaryToNSString:products];
+            const char *charProductInfo;
+            if(productInfo !=nil){
+                charProductInfo = [productInfo UTF8String];
+            }else{
+                charProductInfo = "parse productInfo fail";
+            }
+            std::string stdstr(charProductInfo);
+            callback((IAPProductRestore )ret,stdstr);
         }
     } else {
         PluginUtilsIOS::outputLog("Can't find the C++ object of the IAP plugin");

@@ -43,7 +43,8 @@
     NSLog(@"IAPAppStore::requestProducts");
 }
 
-- (void) restoreCompletedPurchases {
+- (void) restoreCompletedPurchases
+{
     NSLog(@"IAPAppStore::restoreCompletedPurchases");
 }
 

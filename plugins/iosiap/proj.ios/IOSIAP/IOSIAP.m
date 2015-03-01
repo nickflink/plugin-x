@@ -69,14 +69,13 @@ NSArray * _transactionArray;
     _isServerMode = true;
 }
 
--(void)requestProducts:(NSString*) paramMap{
-    [self setDebug:true];
+-(void)requestProducts:(NSString*) paramMap {
     if(!_isAddObserver){
         [[SKPaymentQueue defaultQueue] addTransactionObserver:self];
         _isAddObserver = true;
     }
-    NSArray *producIdArray = [paramMap componentsSeparatedByString:@","];
-    _productIdentifiers = [[NSSet alloc] initWithArray:producIdArray];
+    NSArray *productIdArray = [paramMap componentsSeparatedByString:@","];
+    _productIdentifiers = [[NSSet alloc] initWithArray:productIdArray];
     OUTPUT_LOG(@"param is %@",_productIdentifiers);
     _productsRequest = [[SKProductsRequest alloc] initWithProductIdentifiers:_productIdentifiers];
     _productsRequest.delegate = self;
@@ -163,7 +162,15 @@ NSArray * _transactionArray;
 - (void)restoreTransaction:(SKPaymentTransaction *)transaction {
     OUTPUT_LOG(@"restoreTransaction...");
     [self finishTransaction:transaction.payment.productIdentifier];
-    [IAPWrapper onPayResult:self withRet:PaymentTransactionStateRestored withMsg:@""];
+    
+    NSArray * skProducts = [NSArray array];
+    if(transaction && transaction.payment) {
+        SKProduct *product = [self getProductById:transaction.payment.productIdentifier];
+        if(product) {
+            skProducts = [skProducts arrayByAddingObject:product];
+        }
+    }
+    [IAPWrapper onRestoreProduct:self withRet:RestoreSuccess withProducts:skProducts];
 }
 
 - (void)failedTransaction:(SKPaymentTransaction *)transaction {
@@ -182,7 +189,7 @@ NSArray * _transactionArray;
     [[SKPaymentQueue defaultQueue] restoreCompletedTransactions];
 }
 
--(void) finishTransaction:(NSString *)productId{
+-(void) finishTransaction:(NSString *)productId {
     SKPaymentTransaction *transaction = [self getTranscationByProductId:productId];
     if(transaction){
         [[SKPaymentQueue defaultQueue] finishTransaction:transaction];

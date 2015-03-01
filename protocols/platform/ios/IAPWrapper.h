@@ -31,11 +31,19 @@ typedef enum {
     PaymentTransactionStateRestored,
     PaymentTransactionStateTimeout,
 } IAPResult;
+
 typedef enum {
     RequestSuccees=0,
     RequestFail,
     RequestTimeout,
 } ProductRequest;
+
+typedef enum {
+    RestoreSuccess=0,
+    RestoreFail,
+    RestoreTimeout,
+} ProductRestore;
+
 
 @interface IAPWrapper : NSObject
 {
@@ -43,5 +51,6 @@ typedef enum {
 }
 
 + (void) onPayResult:(id) obj withRet:(IAPResult) ret withMsg:(NSString*) msg;
-+(void) onRequestProduct:(id)ojb withRet:(ProductRequest) ret withProducts:(NSArray *)products;
++ (void) onRequestProduct:(id)ojb withRet:(ProductRequest) ret withProducts:(NSArray *)products;
++ (void) onRestoreProduct:(id)ojb withRet:(ProductRestore) ret withProducts:(NSArray *)products;
 @end
