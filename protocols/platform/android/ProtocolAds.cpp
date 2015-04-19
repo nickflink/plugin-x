@@ -114,6 +114,11 @@ void ProtocolAds::configDeveloperInfo(TAdsDeveloperInfo devInfo)
     }
 }
 
+void ProtocolAds::fetchAds(TAdsInfo info, AdsPos pos) {
+	PluginUtils::outputLog("ProtocolAds", "TODO implement fetchAds");
+	//showAds(info, pos);
+}
+
 void ProtocolAds::showAds(TAdsInfo info, AdsPos pos)
 {
 	PluginJavaData* pData = PluginUtils::getPluginJavaData(this);

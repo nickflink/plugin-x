@@ -316,21 +316,22 @@ public class AnalyticsFlurry implements InterfaceAnalytics {
         });
     }
     
-    protected void setUseHttps(boolean useHttps) {
-        LogD("setUseHttps invoked!");
-        
-        final boolean curCfg = useHttps;
-        PluginWrapper.runOnMainThread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    FlurryAgent.setUseHttps(curCfg);
-                } catch(Exception e){
-                    LogE("Exception in setUseHttps", e);
-                }
-            }
-        });
-    }
+    // setUseHttps is now always enabled and in fact required by google
+    //protected void setUseHttps(boolean useHttps) {
+    //    LogD("setUseHttps invoked!");
+    //    
+    //    final boolean curCfg = useHttps;
+    //    PluginWrapper.runOnMainThread(new Runnable() {
+    //        @Override
+    //        public void run() {
+    //            try {
+    //                FlurryAgent.setUseHttps(curCfg);
+    //            } catch(Exception e){
+    //                LogE("Exception in setUseHttps", e);
+    //            }
+    //        }
+    //    });
+    //}
 
     @Override
     public String getPluginVersion() {

@@ -4,6 +4,7 @@
 	<classpathentry kind="src" path="gen"/>
 	<classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
 	<classpathentry kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
-	<classpathentry exported="true" kind="lib" path="sdk/FlurryAgent.jar"/>
+	<classpathentry exported="true" kind="lib" path="sdk/FlurryAds-5.4.0.jar"/>
+	<classpathentry exported="true" kind="lib" path="sdk/FlurryAnalytics-5.4.0.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>

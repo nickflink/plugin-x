@@ -57,9 +57,8 @@ void ProtocolAds::configDeveloperInfo(TAdsDeveloperInfo devInfo)
         }
     }
 }
-    
-    void ProtocolAds::fetchAds(TAdsInfo info, AdsPos pos)
 
+void ProtocolAds::fetchAds(TAdsInfo info, AdsPos pos)
 {
     PluginOCData* pData = PluginUtilsIOS::getPluginOCData(this);
     assert(pData != NULL);

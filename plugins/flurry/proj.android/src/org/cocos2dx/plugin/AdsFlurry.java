@@ -80,7 +80,7 @@ public class AdsFlurry implements InterfaceAds, FlurryAdListener {
 
     @Override
     public String getSDKVersion() {
-        return "3.2.1";
+        return "5.4.0";
     }
 
     @Override
@@ -229,6 +229,12 @@ public class AdsFlurry implements InterfaceAds, FlurryAdListener {
 
     @Override
     public void onVideoCompleted(String arg0) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void onRendered(String arg0) {
         // TODO Auto-generated method stub
         
     }
